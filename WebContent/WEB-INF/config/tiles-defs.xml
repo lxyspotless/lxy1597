@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<!-- 定义系统中要显示的各种页面，可以在web-context.xml中引用，或者在Controller中引用 -->
+<tiles-definitions>
+	<!-- 主布局 -->
+	<definition name="mainLayout" template="/WEB-INF/view/mainLayout.jsp" >
+		<put-attribute name="title" value="信贷产品管理系统" />
+        <put-attribute name="north" value="/WEB-INF/view/head.jsp" />
+        <put-attribute name="west" value="/WEB-INF/view/menu.jsp" />
+        <put-attribute name="center" value="/WEB-INF/view/menu.jsp" />
+        <put-attribute name="south" value="/WEB-INF/view/foot.jsp" />
+	</definition>
+	<definition name="indexView" extends="mainLayout" >
+		<put-attribute name="title" value="主页面" />
+	  	<put-attribute name="center" value="/WEB-INF/view/index.jsp" />
+	</definition>
+	<!-- 主布局 -->
+	
+	<!-- 项目 -->
+	<!--<definition name="errorView" page="/WEB-INF/view/error.jsp" />-->
+	<!-- 项目 -->
+</tiles-definitions>
