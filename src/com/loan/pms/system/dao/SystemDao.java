@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 public interface SystemDao {
 
-	String loginSystem(Map paramMap);
+	String loginSystem(Map<String, Object> paramMap);
 }

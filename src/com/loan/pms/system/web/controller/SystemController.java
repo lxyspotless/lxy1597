@@ -26,7 +26,7 @@ public class SystemController {
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	public ModelAndView login1(HttpServletRequest request, HttpServletResponse response){
 		String username = request.getParameter("username");
-		Map paramMap = new HashMap<String,String>();
+		Map<String, Object> paramMap = new HashMap<String, Object>();
 		ArrayList<Map<String, Object>> menuList = new ArrayList<Map<String,Object>>();
 		paramMap.put("umId", null==username?"":username.toUpperCase());
 		paramMap.put("passWord", request.getParameter("password"));
@@ -41,14 +41,13 @@ public class SystemController {
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	private void getMenuList(List<Map<String, Object>> menuList){
-		Map map = new HashMap<String,Object>();
+		Map<String, Object> map = new HashMap<String,Object>();
 		map.put("MENU_CODE", "A");
 		map.put("MENU_NAME", "产品管理");
 		map.put("MENU_ACTION", "");
 		menuList.add(map);
-		Map map1 = new HashMap<String,Object>();
+		Map<String, Object> map1 = new HashMap<String,Object>();
 		map1.put("MENU_CODE", "A1");
 		map1.put("MENU_NAME", "销售产品管理");
 		map1.put("PARENT_CODE", "A");

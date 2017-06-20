@@ -17,7 +17,7 @@ public class SystemServiceImpl implements SystemService {
 	private SystemDao systemDao;
 	
 	@Override
-	public boolean loginSystem(Map paramMap) {
+	public boolean loginSystem(Map<String, Object> paramMap) {
 		// TODO
 		String org_code = systemDao.loginSystem(paramMap);
 		System.out.println(org_code);

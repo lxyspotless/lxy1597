@@ -6,5 +6,5 @@ public interface SystemService {
 	
 	public String SERVICE_ID = "pms.systemService";
 	
-	public boolean loginSystem(Map paramMap);
+	public boolean loginSystem(Map<String, Object> paramMap);
 }
