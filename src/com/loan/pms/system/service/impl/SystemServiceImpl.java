@@ -23,7 +23,7 @@ public class SystemServiceImpl implements SystemService {
 		System.out.println(org_code);
 		if(null == org_code){
 			return false;
-		}else{
+		} else {
 			return true;
 		}
 	}
