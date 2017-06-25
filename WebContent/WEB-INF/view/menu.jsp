@@ -1,22 +1,11 @@
-<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-	"http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	
-</head>
-<body>
-   <div style="width: 200px;">
-
-	<li><a href="${context}/one" target='commonFrame'> 
-		 <span> 第一页</span>
-	</a></li>
-
-	<li><a href="${context}/two" target='commonFrame'> 
-		 <span> 第二页</span>
-	</a></li>
-
-	</div>
-</body>
-</html>
+<div id="leftMenu" class="easyui-accordion" data-options="fit:true,border:false">
+	<c:forEach var="item" items="${menuList}">
+		<c:if test="${item.parent_code == null}">
+			<div title="${item.menu_name}" data-options="id:${item.menu_code},title:${item.menu_name}"
+				style="padding:10px;">
+			</div>
+		</c:if>
+	</c:forEach>
+				
+</div>

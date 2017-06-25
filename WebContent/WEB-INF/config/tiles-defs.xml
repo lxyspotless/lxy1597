@@ -8,8 +8,8 @@
 	<definition name="mainLayout" template="/WEB-INF/view/mainLayout.jsp" >
 		<put-attribute name="title" value="信贷产品管理系统" />
         <put-attribute name="north" value="/WEB-INF/view/head.jsp" />
-        <put-attribute name="west" value="/WEB-INF/view/menu.jsp" />
-        <put-attribute name="center" value="/WEB-INF/view/menu.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/view/menu.jsp" />
+        <!-- put-attribute name="center" value="/WEB-INF/view/menu.jsp" /-->
         <put-attribute name="south" value="/WEB-INF/view/foot.jsp" />
 	</definition>
 	<definition name="indexView" extends="mainLayout" >

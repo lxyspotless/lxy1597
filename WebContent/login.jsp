@@ -12,7 +12,7 @@
 	<title>信贷产品配置系统</title>
 </head>
 
-<body style="padding: 0;background-image:url(image/login_back3.jpg);background-repeat:no-repeat;background-size:100%;">
+<body style="padding: 0;background-image:url(image/login_back.jpg);background-repeat:no-repeat;background-size:100%;">
 	<form action="login.do" method="post">
 	<div class="easyui-panel" style="width:350px;height:330px;padding:10px 10px;text-align:center;
 		position: absolute;left:70%;top:45%;">
