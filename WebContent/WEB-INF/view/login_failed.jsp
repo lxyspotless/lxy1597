@@ -14,21 +14,21 @@
 
 <body style="padding: 0;background-image:url(image/login_back.jpg);background-repeat:no-repeat;background-size:100%;">
 	<form action="login.do" method="post">
-	<div class="easyui-panel" style="width:350px;height:330px;padding:10px 10px;text-align:center;
+	<div class="easyui-panel" style="width:300px;height:330px;padding:10px 10px;text-align:center;
 		position: absolute;left:70%;top:45%;">
 		<p style="font-size: xx-large; color:#11b0da; padding: 0px 0px 0px; position: relative;">
 			产品配置平台<br>
 		</p>
 		<div style="margin-bottom:20px">
-			<input name="username" class="easyui-textbox" prompt="输入用户名" iconWidth="30" style="width:300px;height:35px;padding:10px;">
+			<input name="loginUserName" class="easyui-textbox" prompt="输入用户名" iconWidth="30" style="width:250px;height:35px;padding:10px;">
 		</div>
 		<div style="margin-bottom:20px">
-			<input name="password" class="easyui-passwordbox" prompt="输入密码" iconWidth="30" style="width:300px;height:35px;padding:10px">
+			<input name="loginPassWord" class="easyui-passwordbox" prompt="输入密码" iconWidth="30" style="width:250px;height:35px;padding:10px">
 		</div>
 		<input type="submit" value="登录" style="width: 48px; height: 30px; border: 0; background-color:#11b0da;cursor: pointer;"/>
-		<div id="error">
-			<p style="color:#ff0000; position: relative;">账号或密码错误</p>
-		</div>
+		
+			<p style="color:#ff0000;">${faildMsg}</p>
+		
 	</div>
 	</form>
 </body>

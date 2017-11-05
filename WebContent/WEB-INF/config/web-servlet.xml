@@ -17,39 +17,27 @@
 	
 	<!-- 启用 spring mvc 注解 -->  
     <mvc:annotation-driven/>  
-    <!-- 对com.yue下所有包下的类的注解进行扫描,并自动创建bean实例和装配bean -->  
+    <!-- 对com.loan.pms下所有包下的类的注解进行扫描,并自动创建bean实例和装配bean -->  
     <context:component-scan base-package="com.loan.pms"></context:component-scan>  
 	
 	<!-- 视图定义 -->
-	<!--<bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles2.TilesViewResolver">
-		<property name="order" value="1" />
-	</bean>-->
-	
-	<!--<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
-		<property name="definitions">
-			<list>
-				<value>/WEB-INF/config/tiles-defs.xml</value>
-			</list>
-		</property>
-	</bean>-->
-	
-	<!-- 优先匹配tiles视图 -->
-	<bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-        <property name="viewClass">
+	<bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles2.TilesViewResolver">
+		<property name="viewClass">
             <value>
                 org.springframework.web.servlet.view.tiles2.TilesView
             </value>
         </property>
         <property name="order" value="1" />
-    </bean>
-    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
-        <property name="definitions">
-            <list>
-                <value>/WEB-INF/config/tiles-defs.xml</value>
-            </list>
-        </property>
-    </bean>
-
+	</bean>
+	
+	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/config/tiles-defs.xml</value>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- 配置视图解析器 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<!-- 前缀 -->

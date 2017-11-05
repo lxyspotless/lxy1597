@@ -1,6 +1,7 @@
 package com.loan.pms.system.web.controller;
 
 import java.util.Map;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,97 +14,76 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.loan.pms.system.SystemFinal;
 import com.loan.pms.system.service.SystemService;
 
+import org.apache.commons.collections4.functors.IfClosure;
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 
 @Controller
 public class SystemController {
 	
+	private static Logger logger = Logger.getLogger(SystemController.class);
+	
 	@Resource(name = SystemService.SERVICE_ID)
 	private SystemService systemService;
 	
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public ModelAndView login1(HttpServletRequest request, HttpServletResponse response){
-		String username = request.getParameter("username");
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		ArrayList<Map<String, Object>> menuList = new ArrayList<Map<String,Object>>();
-		paramMap.put("umId", null==username?"":username.toUpperCase());
-		paramMap.put("passWord", request.getParameter("password"));
-		if(systemService.loginSystem(paramMap)){
-			ModelAndView mav = new ModelAndView("indexView");
-			getMenuList(menuList);
-			mav.addObject("menuList",menuList);
-			return mav;
+	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
+		logger.info("Login system begin");
+		// 获取登录账号密码
+		String loginUserName = request.getParameter(SystemFinal.LOGIN_USERNAME);
+		String loginPassWord = request.getParameter(SystemFinal.LOGIN_PASSWORD);
+		String failedMsg = "";
+		String userName = "";
+		List<Map<String, Object>> menuList = new ArrayList<Map<String, Object>>();
+		// 判断账号密码是否有错
+		if(StringUtils.isEmpty(loginUserName)){
+			failedMsg = SystemFinal.LOGIN_ERROR_USER_NULL;
+		}else if(StringUtils.isEmpty(loginPassWord)){
+			failedMsg = SystemFinal.LOGIN_ERROR_PASS_NULL;
 		}else{
-			ModelAndView mav = new ModelAndView("login_failed");
-			return mav;
+			userName = systemService.loginSystem(loginUserName, loginPassWord);
+			if(StringUtils.isEmpty(userName)){
+				failedMsg = SystemFinal.LOGIN_ERROR_LOGIN_FAILED;
+			}
 		}
+		// 根据错误信息failedMsg判断要返回的页面
+		ModelAndView mav = new ModelAndView();
+		// 根据failedMsg是否为空判断登录是否成功
+		if(StringUtils.isEmpty(failedMsg)){
+			logger.info("login system success:"+loginUserName);
+			//indexView.view主布局名称
+			mav.setViewName("indexView.view");
+			//getMenuList(menuList);
+			menuList = systemService.querySystemMenuList();
+			mav.addObject("menuList",menuList);
+			mav.addObject("userName",userName);
+		} else {
+			logger.info("login system failed:"+loginUserName);
+			mav.setViewName("login_failed");
+			mav.addObject("faildMsg",failedMsg);
+		}
+		return mav;
 	}
 	
-	private void getMenuList(List<Map<String, Object>> menuList){
-		Map<String, Object> map = new HashMap<String,Object>();
-		map.put("SORT_NO", "1");
-		map.put("MENU_CODE", "PMS10001");
-		map.put("MENU_NAME", "产品配置");
-		map.put("PARENT_CODE", "");
-		map.put("MENU_ACTION", "");
-		menuList.add(map);
-		map = new HashMap<String,Object>();
-		map.put("SORT_NO", "1");
-		map.put("MENU_CODE", "PMS100010001");
-		map.put("MENU_NAME", "销售产品管理");
-		map.put("PARENT_CODE", "PMS10001");
-		map.put("MENU_ACTION", "forward.do?view=saleProductList.view");
-		menuList.add(map);
-		map = new HashMap<String,Object>();
-		map.put("SORT_NO", "2");
-		map.put("MENU_CODE", "PMS100010002");
-		map.put("MENU_NAME", "产品信息管理");
-		map.put("PARENT_CODE", "PMS10001");
-		map.put("MENU_ACTION", "forward.do?view=subProductList.view");
-		menuList.add(map);
-		map = new HashMap<String,Object>();
-		map.put("SORT_NO", "1");
-		map.put("MENU_CODE", "PMS10002");
-		map.put("MENU_NAME", "版本管理");
-		map.put("PARENT_CODE", "");
-		map.put("MENU_ACTION", "");
-		menuList.add(map);
-		map = new HashMap<String,Object>();
-		map.put("SORT_NO", "1");
-		map.put("MENU_CODE", "PMS100020001");
-		map.put("MENU_NAME", "产品复制");
-		map.put("PARENT_CODE", "PMS10002");
-		map.put("MENU_ACTION", "forward.do?view=productCopy.view");
-		menuList.add(map);
-		map = new HashMap<String,Object>();
-		map.put("SORT_NO", "2");
-		map.put("MENU_CODE", "PMS100020003");
-		map.put("MENU_NAME", "产品版本管理");
-		map.put("PARENT_CODE", "PMS10002");
-		map.put("MENU_ACTION", "forward.do?view=productVersionManager.view");
-		menuList.add(map);
-		map = new HashMap<String,Object>();
-		map.put("SORT_NO", "3");
-		map.put("MENU_CODE", "PMS100020004");
-		map.put("MENU_NAME", "产品复核");
-		map.put("PARENT_CODE", "PMS10002");
-		map.put("MENU_ACTION", "forward.do?view=productCheck.view");
-		menuList.add(map);
-		map = new HashMap<String,Object>();
-		map.put("SORT_NO", "4");
-		map.put("MENU_CODE", "PMS100020004");
-		map.put("MENU_NAME", "产品审核");
-		map.put("PARENT_CODE", "PMS10002");
-		map.put("MENU_ACTION", "forward.do?view=productApprove.view");
-		menuList.add(map);
-		map = new HashMap<String,Object>();
-		map.put("SORT_NO", "5");
-		map.put("MENU_CODE", "PMS100020005");
-		map.put("MENU_NAME", "产品发布");
-		map.put("PARENT_CODE", "PMS10002");
-		map.put("MENU_ACTION", "forward.do?view=productRelease.view");
-		menuList.add(map);
+	@RequestMapping(value = "/logout.do", method = RequestMethod.POST)
+	public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		response.sendRedirect("login.jsp");
+		logger.info("exist system");
+		return;
 	}
+
+	@RequestMapping(value = "/forwardView.do", method = RequestMethod.GET)
+	public ModelAndView forwardView(HttpServletRequest request, HttpServletResponse response){
+		String view = request.getParameter("view");
+		ModelAndView mav = new ModelAndView();
+		if(!StringUtils.isEmpty(view)) {
+			mav.setViewName(view);
+		}
+		return mav;
+	}
+
 }

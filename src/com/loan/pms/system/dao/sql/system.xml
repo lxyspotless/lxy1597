@@ -2,14 +2,24 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.loan.pms.system.dao.SystemDao">
-    
     <select id="loginSystem" parameterType="java.util.Map" resultType="java.lang.String">
-        select org_code
+        select user_name
         from pms_um_info
         where um_id = #{umId,jdbcType=VARCHAR} and
         	pass_word = #{passWord,jdbcType=VARCHAR} and
         	status = 'Y'
     </select>
     
+    <select id="querySystemMenuList" resultType="java.util.HashMap">
+        select distinct right_code   as "menuCode",
+                right_name   as "menuName",
+                parent_code  as "parentCode",
+                right_action as "menuAction"
+		  from pms_right_info
+		 where right_type = 'MENU'
+		   and status = 'Y'
+		 order by right_code
+    </select>
 </mapper>

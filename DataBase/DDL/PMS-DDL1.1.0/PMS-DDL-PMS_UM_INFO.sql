@@ -1,4 +1,5 @@
 drop table PMS_UM_INFO cascade constraints;
+alter table PMS_UM_INFO drop constraint ID_UM_PK_KEY cascade
 
 create table PMS_UM_INFO
 (
@@ -41,3 +42,5 @@ comment on column PMS_UM_INFO.updated_by is '修改人';
 comment on column PMS_UM_INFO.date_updated is '修改时间';
 -- Create/Recreate primary, unique and foreign key constraints 
 alter table PMS_UM_INFO add constraint ID_UM_PK_KEY primary key (ID_UM_PK);
+-- Create index
+create unique index UM_ID_IDX ON PMS_UM_INFO(um_id);

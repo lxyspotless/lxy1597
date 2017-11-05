@@ -4,6 +4,6 @@
 	"http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<body>
-	   <h1>north</h1>
+	   <h1>head</h1>
 	</body>
 </html>

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.loan.pms.system.service.SystemService;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 
 @Controller
@@ -22,24 +23,5 @@ public class ProductController {
 	@Resource(name = SystemService.SERVICE_ID)
 	private SystemService systemService;
 	
-	@RequestMapping(value = "forward/saleProductDetaol.do", method = RequestMethod.POST)
-	public ModelAndView login1(HttpServletRequest request, HttpServletResponse response){
-		String username = request.getParameter("username");
-		Map paramMap = new HashMap<String,String>();
-		Map resultMap = new HashMap<String,Object>();
-		ArrayList<Map<String, Object>> menuList = new ArrayList<Map<String,Object>>();
-		paramMap.put("umId", null==username?"":username.toUpperCase());
-		paramMap.put("passWord", request.getParameter("password"));
-		if(systemService.loginSystem(paramMap)){
-			resultMap.put("helloworld", "pass_"+username);
-		}else{
-			resultMap.put("helloworld", "refuse_"+username);
-		}
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("index");
-		mav.addAllObjects(resultMap);
-		//mav.addObject("helloworld", "login_"+hello);
-		return mav;
-	}
 	
 }
