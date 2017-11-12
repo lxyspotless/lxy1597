@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.loan.pms.system.dao.SystemDao;
+import com.loan.pms.system.dto.SystemMenuDTO;
 import com.loan.pms.system.service.SystemService;
 
 @Service(SystemService.SERVICE_ID)
@@ -35,23 +36,22 @@ public class SystemServiceImpl implements SystemService {
 		return userName;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<Map<String, Object>> querySystemMenuList() {
+	public List<SystemMenuDTO> querySystemMenuList() {
 		// 查询菜单列表
-		List<Map<String, Object>> menuList = systemDao.querySystemMenuList();
-		List<Map<String, Object>> resultMenuList = new ArrayList<Map<String, Object>>();
+		List<SystemMenuDTO> menuList = systemDao.querySystemMenuList();
+		List<SystemMenuDTO> resultMenuList = new ArrayList<SystemMenuDTO>();
 		if(null != menuList && menuList.size() > 0) {
-			List<Map<String, Object>> childMenuList = new ArrayList<Map<String, Object>>();
+			List<SystemMenuDTO> childMenuList = new ArrayList<SystemMenuDTO>();
 			for(int i = 0 ; i < menuList.size() ; i++) {
 				// 主菜单,先保存将子菜单加入到childMenu中
-				if(null == menuList.get(i).get("parentCode")) {
+				if(null == menuList.get(i).getParentCode()) {
 					// 将主菜单放入resultMenuList
 					resultMenuList.add(menuList.get(i));
 					// 将上次加入的主菜单放入子菜单
 					if(resultMenuList.size() > 1) {
-						resultMenuList.get(resultMenuList.size() - 2).put("childMenu", childMenuList);
-						childMenuList = new ArrayList<Map<String, Object>>();
+						resultMenuList.get(resultMenuList.size() - 2).setChildMenu(childMenuList);
+						childMenuList = new ArrayList<SystemMenuDTO>();
 					}
 				} else {
 					// 子菜单拼接,SQL中已排序
@@ -59,7 +59,7 @@ public class SystemServiceImpl implements SystemService {
 				}
 				// 最后一个主菜单,放入子菜单
 				if(i == menuList.size() - 1) {
-					resultMenuList.get(resultMenuList.size() - 1).put("childMenu", childMenuList);
+					resultMenuList.get(resultMenuList.size() - 1).setChildMenu(childMenuList);
 				}
 			}
 			logger.info("系统菜单数:"+menuList.size());

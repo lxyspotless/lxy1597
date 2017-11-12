@@ -12,11 +12,11 @@ public interface SystemDao {
 	 * @param paramMap
 	 * @return String
 	 */
-	String loginSystem(Map<String, Object> paramMap);
+	public String loginSystem(Map<String, Object> paramMap);
 	
 	/**
 	 * 查询菜单列表
 	 * @return List<Map<String, Object>>
 	 */
-	List<Map<String, Object>> querySystemMenuList();
+	public List<SystemMenuDTO> querySystemMenuList();
 }

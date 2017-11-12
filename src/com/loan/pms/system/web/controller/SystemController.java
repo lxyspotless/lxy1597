@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.loan.pms.system.SystemFinal;
+import com.loan.pms.system.dto.SystemMenuDTO;
 import com.loan.pms.system.service.SystemService;
+import com.loan.pms.system.util.SystemFinal;
 
 import org.apache.commons.collections4.functors.IfClosure;
 import org.apache.commons.lang.StringUtils;
@@ -32,13 +33,13 @@ public class SystemController {
 	
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
-		logger.info("Login system begin");
+		logger.info("Login system - begin");
 		// 获取登录账号密码
 		String loginUserName = request.getParameter(SystemFinal.LOGIN_USERNAME);
 		String loginPassWord = request.getParameter(SystemFinal.LOGIN_PASSWORD);
 		String failedMsg = "";
 		String userName = "";
-		List<Map<String, Object>> menuList = new ArrayList<Map<String, Object>>();
+		List<SystemMenuDTO> menuList = new ArrayList<SystemMenuDTO>();
 		// 判断账号密码是否有错
 		if(StringUtils.isEmpty(loginUserName)){
 			failedMsg = SystemFinal.LOGIN_ERROR_USER_NULL;
@@ -63,13 +64,14 @@ public class SystemController {
 			mav.addObject("userName",userName);
 		} else {
 			logger.info("login system failed:"+loginUserName);
-			mav.setViewName("login_failed");
+			mav.setViewName("login");
 			mav.addObject("faildMsg",failedMsg);
 		}
+		logger.info("Login system - end");
 		return mav;
 	}
 	
-	@RequestMapping(value = "/logout.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
 	public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		response.sendRedirect("login.jsp");
 		logger.info("exist system");
@@ -79,6 +81,7 @@ public class SystemController {
 	@RequestMapping(value = "/forwardView.do", method = RequestMethod.GET)
 	public ModelAndView forwardView(HttpServletRequest request, HttpServletResponse response){
 		String view = request.getParameter("view");
+		logger.info("页面：" + view);
 		ModelAndView mav = new ModelAndView();
 		if(!StringUtils.isEmpty(view)) {
 			mav.setViewName(view);

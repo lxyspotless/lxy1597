@@ -12,9 +12,9 @@ create table PMS_UM_INFO
   org_code varchar2(50),
   org_business_type varchar2(32) default 'COMMON',
   pass_word varchar2(32) not null,
-  created_by varchar2(150) default 'system' not null,
+  created_by varchar2(100) default 'system' not null,
   date_created timestamp not null,
-  updated_by varchar2(150) default 'system' not null,
+  updated_by varchar2(100) default 'system' not null,
   date_updated timestamp not null
 )
 tablespace PMSDATA

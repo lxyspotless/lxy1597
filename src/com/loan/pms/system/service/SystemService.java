@@ -3,9 +3,11 @@ package com.loan.pms.system.service;
 import java.util.List;
 import java.util.Map;
 
+import com.loan.pms.system.dto.SystemMenuDTO;
+
 public interface SystemService {
 	
-	public String SERVICE_ID = "pms.systemService";
+	public String SERVICE_ID = "pms.system.systemService";
 	
 	/**
 	 * 登录验证用户密码
@@ -18,5 +20,5 @@ public interface SystemService {
 	 * 查询菜单列表
 	 * @return menuList
 	 */
-	public List<Map<String, Object>> querySystemMenuList(); 
+	public List<SystemMenuDTO> querySystemMenuList(); 
 }

@@ -14,7 +14,7 @@ public class SystemMenuDTO {
 	/*菜单动作*/
 	private String menuAction;
 	/*子菜单*/
-	private List<Map<String,Object>> childMenu;
+	private List<SystemMenuDTO> childMenu;
 	
 	public String getMenuCode() {
 		return menuCode;
@@ -40,10 +40,10 @@ public class SystemMenuDTO {
 	public void setMenuAction(String menuAction) {
 		this.menuAction = menuAction;
 	}
-	public List<Map<String,Object>> getChildMenu() {
+	public List<SystemMenuDTO> getChildMenu() {
 		return childMenu;
 	}
-	public void setChildMenu(List<Map<String,Object>> childMenu) {
+	public void setChildMenu(List<SystemMenuDTO> childMenu) {
 		this.childMenu = childMenu;
 	}
 	

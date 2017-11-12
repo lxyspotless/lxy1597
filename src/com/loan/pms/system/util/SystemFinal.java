@@ -1,4 +1,4 @@
-package com.loan.pms.system;
+package com.loan.pms.system.util;
 
 public interface SystemFinal {
 	// 登录用户名

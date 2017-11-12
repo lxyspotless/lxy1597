@@ -4,16 +4,16 @@
 <!-- 定义系统中要显示的各种页面，可以在web-context.xml中引用，或者在Controller中引用 -->
 <tiles-definitions>
 	<!-- 主布局 -->
-	<definition name="mainLayout" template="/WEB-INF/view/mainLayout.jsp" >
+	<definition name="mainLayout" template="/layout/mainLayout.jsp" >
 		<put name="title" value="信贷产品管理系统" />
-        <put name="header" value="/WEB-INF/view/head.jsp" />
-        <put name="menu" value="/WEB-INF/view/menu.jsp" />
-        <!-- put-attribute name="center" value="/WEB-INF/view/menu.jsp" /-->
-        <put name="footer" value="/WEB-INF/view/foot.jsp" />
+        <put name="header" value="/layout/head.jsp" />
+        <put name="menu" value="/layout/menu.jsp" />
+        <!-- put-attribute name="center" value="/layout/menu.jsp" /-->
+        <put name="footer" value="/layout/foot.jsp" />
 	</definition>
 	<definition name="indexView.view" extends="mainLayout" >
 		<put name="title" value="主页面" />
-	  	<put name="center" value="/WEB-INF/view/index.jsp" />
+	  	<put name="center" value="/layout/index.jsp" />
 	</definition>
 	<!-- 主布局 -->
 	

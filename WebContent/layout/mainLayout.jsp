@@ -15,6 +15,7 @@
 	<link rel="stylesheet" type="text/css" href="jquery-easyui/demo/demo.css">
 	<script type="text/javascript" src="jquery-easyui/jquery.min.js"></script>
 	<script type="text/javascript" src="jquery-easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="seajs/sea.js"></script>
 	<style>
 		.link_button{
 			height:21px;
@@ -37,7 +38,7 @@
 			<div style="margin-top:20px; margin-left:80%">
 				<a id='userName' data-option="plain:true" target="_top" >欢迎你：${userName}&nbsp;&nbsp;&nbsp;</a>
 				<a id='logoutLink' href="javascript:void(0);" class="easyui-linkbutton" data-option="plain:true" target="_top"
-					onclick="top.location.href='logout.do'" style="color:#ffff; ">注销</a>
+					onclick="top.location.href='logout.do'" style="color:#FF0000; ">注销</a>
 			</div>
 		</div>
 		
@@ -100,11 +101,9 @@
 				}
 			}
 		}).tabs('followCustomHandle');
-		debugger;
 	});
 	
 	function addTab(tabid, title, url) {
-		debugger;
 		if ($('#centerArea').tabs('exists', title)){
 			$('#centerArea').tabs('select', title);
 		} else {

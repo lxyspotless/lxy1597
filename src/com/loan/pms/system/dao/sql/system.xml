@@ -12,14 +12,15 @@
         	status = 'Y'
     </select>
     
-    <select id="querySystemMenuList" resultType="java.util.HashMap">
-        select distinct right_code   as "menuCode",
-                right_name   as "menuName",
-                parent_code  as "parentCode",
-                right_action as "menuAction"
-		  from pms_right_info
-		 where right_type = 'MENU'
-		   and status = 'Y'
-		 order by right_code
+    <select id="querySystemMenuList" resultType="com.loan.pms.system.dto.SystemMenuDTO">
+        select right_code   as "menuCode",
+        	right_name   as "menuName",
+       		parent_code  as "parentCode",
+       		right_action as "menuAction"
+  		from pms_right_info pri
+ 		where pri.right_type = 'MENU'
+   			and pri.status = 'Y'
+ 			start with pri.parent_code is null
+			connect by prior pri.right_code = pri.parent_code
     </select>
 </mapper>

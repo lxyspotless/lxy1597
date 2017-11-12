@@ -9,9 +9,9 @@ create table PMS_RIGHT_INFO
   right_type varchar2(100) not null,
   right_action varchar2(100),
   status varchar2(1) default 'Y' not null,
-  created_by varchar2(150) default 'system' not null,
+  created_by varchar2(100) default 'system' not null,
   date_created timestamp default sysdate not null,
-  updated_by varchar2(150) default 'system' not null,
+  updated_by varchar2(100) default 'system' not null,
   date_updated timestamp default sysdate not null
 )
 tablespace PMSDATA

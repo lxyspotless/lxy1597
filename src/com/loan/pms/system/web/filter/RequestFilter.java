@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.loan.pms.system.SystemFinal;
+import com.loan.pms.system.util.SystemFinal;
 
 public class RequestFilter extends OncePerRequestFilter {
 
@@ -23,7 +23,8 @@ public class RequestFilter extends OncePerRequestFilter {
 		String url = requestUrl.substring(contextPath.length());
 		String userName = (String) request.getSession().getAttribute(SystemFinal.LOGIN_USERNAME);
 		if(!url.endsWith("login.do") && !url.endsWith("logout.do") && StringUtils.isEmpty(userName)){
-			
+			//response.sendRedirect("login.jsp");
+			//return;
 		}
 		chain.doFilter(request, response);
 

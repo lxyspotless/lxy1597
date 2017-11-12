@@ -26,6 +26,7 @@
 			<input name="loginPassWord" class="easyui-passwordbox" prompt="输入密码" iconWidth="30" style="width:250px;height:35px;padding:10px">
 		</div>
 		<input type="submit" value="登录" style="width: 48px; height: 30px; border: 0; background-color:#11b0da;cursor: pointer;"/>
+		<p style="color:#ff0000;">${faildMsg}</p>
 	</div>
 	</form>
 </body>
