@@ -1,8 +1,6 @@
 package com.loan.pms.system.service;
 
 import java.util.List;
-import java.util.Map;
-
 import com.loan.pms.system.dto.SystemMenuDTO;
 
 public interface SystemService {

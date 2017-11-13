@@ -1,7 +1,6 @@
 package com.loan.pms.system.dto;
 
 import java.util.List;
-import java.util.Map;
 
 public class SystemMenuDTO {
 

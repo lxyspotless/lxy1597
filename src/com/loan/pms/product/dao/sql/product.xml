@@ -23,6 +23,9 @@
 		  	<if test="businessLine != null">
 	        	ppmt.business_line = #{businessLine}
 	    	</if> 
+		  	<if test="productType != null">
+	        	and ppmt.product_type like '%'||#{productType}||'%'
+	    	</if> 
 		  	<if test="productName != null">
 	        	and ppmt.product_name like '%'||#{productName}||'%'
 	    	</if> 

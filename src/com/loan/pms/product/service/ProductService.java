@@ -1,7 +1,6 @@
 package com.loan.pms.product.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.loan.pms.product.dto.ProductInfoDTO;
 

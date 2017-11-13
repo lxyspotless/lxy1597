@@ -1,9 +1,7 @@
 package com.loan.pms.system.web.controller;
 
-import java.util.Map;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -18,7 +16,6 @@ import com.loan.pms.system.dto.SystemMenuDTO;
 import com.loan.pms.system.service.SystemService;
 import com.loan.pms.system.util.SystemFinal;
 
-import org.apache.commons.collections4.functors.IfClosure;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;

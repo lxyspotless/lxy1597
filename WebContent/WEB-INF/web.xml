@@ -15,31 +15,16 @@
   	</init-param>
   </filter>
   
-  <!-- 自定义拦截器 -->
-  <filter>
-  	<filter-name>requestFilter</filter-name>
-  	<filter-class>com.loan.pms.system.web.filter.RequestFilter</filter-class>
-  	<init-param>
-  		<param-name>exclude</param-name>
-  		<param-value>/login.do</param-value>
-  	</init-param>
-  	<init-param>
-  		<description>allow request method</description>
-  		<param-name>methods</param-name>
-  		<param-value>GET,POST,PUT</param-value>
-  	</init-param>
-  </filter>
-  <!-- 拦截所有请求 -->
-  <filter-mapping>
-  	<filter-name>requestFilter</filter-name>
-  	<url-pattern>/*</url-pattern>
-  </filter-mapping>
-  
   <!-- 初始页面 -->
   <display-name>springMvc</display-name>
   <welcome-file-list>
   	<welcome-file>login.jsp</welcome-file>
   </welcome-file-list>
+  <!-- 出错页面 -->
+  <error-page>
+  	<exception-type>java.lang.Throwable</exception-type>
+  	<location>/layout/error.jsp</location>
+  </error-page>
   
   <!-- 初始化DispatcherServlet -->
   <servlet>
@@ -67,10 +52,25 @@
 	<param-value>/WEB-INF/config/applicationContext.xml</param-value>
   </context-param>
   
-  <error-page>
-  	<exception-type>java.lang.Throwable</exception-type>
-  	<location>/layout/error.jsp</location>
-  </error-page>
+  <!-- 自定义拦截器 -->
+  <filter>
+  	<filter-name>requestFilter</filter-name>
+  	<filter-class>com.loan.pms.system.web.filter.RequestFilter</filter-class>
+  	<init-param>
+  		<param-name>exclude</param-name>
+  		<param-value>/login.do</param-value>
+  	</init-param>
+  	<init-param>
+  		<description>allow request method</description>
+  		<param-name>methods</param-name>
+  		<param-value>GET,POST,PUT</param-value>
+  	</init-param>
+  </filter>
+  <!-- 拦截所有请求 -->
+  <filter-mapping>
+  	<filter-name>requestFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
   
   <!--  
   <login-config>
