@@ -34,6 +34,11 @@ public class SystemServiceImpl implements SystemService {
 	}
 
 	@Override
+	public String queryUserName(String loginUserName) {
+		return systemDao.queryUserName(loginUserName);
+	}
+
+	@Override
 	public List<SystemMenuDTO> querySystemMenuList() {
 		// 查询菜单列表
 		List<SystemMenuDTO> menuList = systemDao.querySystemMenuList();
@@ -62,6 +67,11 @@ public class SystemServiceImpl implements SystemService {
 			logger.info("系统菜单数:"+menuList.size());
 		}
 		return resultMenuList;
+	}
+
+	@Override
+	public List<Map<String, Object>> queryDicCodeItem(String codeNo) {
+		return systemDao.queryDicCodeItem(codeNo);
 	}
 
 }

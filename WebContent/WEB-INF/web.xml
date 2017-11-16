@@ -20,6 +20,15 @@
   <welcome-file-list>
   	<welcome-file>login.jsp</welcome-file>
   </welcome-file-list>
+  <login-config>
+  	<auth-method>FORM</auth-method>
+  	<realm-name>default</realm-name>
+  	<form-login-config>
+  		<!-- 登录页面 -->
+  		<form-login-page>/login.jsp</form-login-page>
+  		<form-error-page>/layout/error.jsp</form-error-page>
+  	</form-login-config>
+  </login-config>
   <!-- 出错页面 -->
   <error-page>
   	<exception-type>java.lang.Throwable</exception-type>
@@ -37,10 +46,14 @@
     <!-- 随Servlet容器一起启动 -->
     <load-on-startup>1</load-on-startup>
   </servlet>
-  <!-- .do结尾的请求映射到DispatcherServlet -->
+  <!-- .do、.json结尾的请求映射到DispatcherServlet -->
   <servlet-mapping>
     <servlet-name>dispatcher</servlet-name>
     <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>*.json</url-pattern>
   </servlet-mapping>
   
   <!-- 装载容器 -->
@@ -52,13 +65,19 @@
 	<param-value>/WEB-INF/config/applicationContext.xml</param-value>
   </context-param>
   
-  <!-- 自定义拦截器 -->
+  <!-- 自定义无需登录拦截器 -->
   <filter>
   	<filter-name>requestFilter</filter-name>
   	<filter-class>com.loan.pms.system.web.filter.RequestFilter</filter-class>
+  	<!-- 不登录即可访问的请求 -->
   	<init-param>
   		<param-name>exclude</param-name>
-  		<param-value>/login.do</param-value>
+  		<param-value>/;/login.jsp;/login.do;/logout.do;.js;.css;.gif;.jpg;.png</param-value>
+  	</init-param>
+  	<!-- 登录超时时间-分钟 -->
+  	<init-param>
+  		<param-name>loginOutTimeMin</param-name>
+  		<param-value>10</param-value>
   	</init-param>
   	<init-param>
   		<description>allow request method</description>

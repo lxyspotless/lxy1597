@@ -9,17 +9,12 @@ define(function(require, exports, module){
 		});
 		
 		tb.find('#saleProductList_businessLine').combobox({
-			valueField: 'value',
-			textField: 'text',
+			url : './queryDicCodeItem.json?codeNo=BusinessLine',
+			method : 'get',
+			valueField: 'ITEMNO',
+			textField: 'ITEMNAME',
 			editable: false,
-			panelHeight: 'auto',
-			data: [{
-				value: '10001',
-				text: '无抵押'
-			},{
-				value: '10002',
-				text: '有抵押'
-			}]
+			panelHeight: 'auto'
 		});
 		
 		$dg = tb.find('#saleProductListDataTable').datagrid({

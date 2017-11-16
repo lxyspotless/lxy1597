@@ -12,6 +12,13 @@
         	status = 'Y'
     </select>
     
+    <select id="queryUserName" parameterType="java.lang.String" resultType="java.lang.String">
+        select user_name
+        from pms_um_info
+        where um_id = #{umId,jdbcType=VARCHAR} and
+        	status = 'Y'
+    </select>
+    
     <select id="querySystemMenuList" resultType="com.loan.pms.system.dto.SystemMenuDTO">
         select right_code   as "menuCode",
         	right_name   as "menuName",
@@ -22,5 +29,16 @@
    			and pri.status = 'Y'
  			start with pri.parent_code is null
 			connect by prior pri.right_code = pri.parent_code
+			order by pri.right_code
+    </select>
+    
+    <select id="queryDicCodeItem" parameterType="java.lang.String" resultType="java.util.Map">
+        select pdd.code_no as codeNo, 
+        	pdd.code_name as codeName, 
+        	pdd.item_no as itemNo, 
+        	pdd.item_name as itemName, 
+        	pdd.sort_no as sortNo
+  		from pms_data_dictionary pdd
+ 		where pdd.code_no = #{codeNo}
     </select>
 </mapper>
