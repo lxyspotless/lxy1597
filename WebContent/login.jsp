@@ -13,6 +13,7 @@
 </head>
 
 <body style="padding: 0;background-image:url(image/login_back.jpg);background-repeat:no-repeat;background-size:100%;">
+	<div class="login">
 	<form action="login.do" method="post">
 	<div class="easyui-panel" style="width:300px;height:330px;padding:10px 10px;text-align:center;
 		position: absolute;left:70%;top:45%;">
@@ -29,5 +30,6 @@
 		<p style="color:#ff0000;">${faildMsg}</p>
 	</div>
 	</form>
+	</div>
 </body>
 </html>

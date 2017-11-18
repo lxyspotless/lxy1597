@@ -15,6 +15,7 @@
 	<link rel="stylesheet" type="text/css" href="jquery-easyui/demo/demo.css">
 	<script type="text/javascript" src="jquery-easyui/jquery.min.js"></script>
 	<script type="text/javascript" src="jquery-easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
 	<script type="text/javascript" src="seajs/sea.js"></script>
 	<style>
 		.link_button{
@@ -91,6 +92,22 @@
 	
 </body>
 <script type="text/javascript">
+	//判断是否超时，超时直接退出
+	(function(){
+		$.ajaxSetup({
+			beforeSend: function(xhr){
+				
+			},
+			complete: function(XMLHttpRequest, status){
+				debugger;
+				var response = XMLHttpRequest.responseText.substr(0,20);
+				if(response == '{sessionOutOfTime:0}'){
+					top.location.href = 'login.jsp';
+				}
+			}
+		})
+	})()
+	
 	var tabManager;
 	$(function(){
 		tabManager = $('centerArea').tabs({
@@ -103,6 +120,7 @@
 		}).tabs('followCustomHandle');
 	});
 	
+	//菜单调用添加tab页方法
 	function addTab(tabid, title, url) {
 		if ($('#centerArea').tabs('exists', title)){
 			$('#centerArea').tabs('select', title);
@@ -115,7 +133,6 @@
 					}
 				}
 			}).tabs();
-			//var url = 'head.jsp';
 			var content = '<iframe scrolling="auto" frameborder="0"  src="' + url + '" style="width:100%;height:88%;border:0;"></iframe>';
 			var a = $.extend({href : url}, {});
 			var opts = {
@@ -127,46 +144,11 @@
 				border : false,
 				fit : true
 			};
-			//tabManager.tabs('add', opts);
 			$('#centerArea').tabs('add', opts);
 		}
-		/* _addTab(tabid, text, $.extend({
-			href : url
-		}));
-		if (tabManager.tabs('exists', tabid)){
-			tabManager.tabs('select', tabid);
-		} else {
-			//url = 'WEB-INF/view/head.jsp';
-			var content = '<iframe scrolling="auto" frameborder="0"  src='+url+'" style="width:100%;height:100%;"></iframe>';
-			tabManager.tabs('add',{
-				title:title,
-				content:content,
-				closable:true
-			});
-		} 
-		$.get('/forwardView.do', {url : url}, function(data) {
-			alert(data);});
-		addTab(tabid, text, $.extend({
-			href : url,
-			//屏幕权限拦截字符串显示在tab中
-			onLoad : function(panel) {
-				if(panel[0] == "{limit:1}") {
-					tabManager.tabs("close", tabManager.tabs("tabs").length - 1);
-				}
-			},
-			onResize : function(width, height) {
-				if(resizeMethodObj[tabid]) {
-					setTimeout(resizeMethodObj[tabid],1000);
-				}
-			},
-			onDestroy : function() {
-				if(tabid == 'querySubDetail') {
-					$('#productTermLabel input').remove();
-				}
-			}
-		}, options))*/
 	}
 	
+	//tab页添加实现
 	function _addTab(tabid, text, options) {
 		//var id = _uniform(tabid);
 		if(tabManager.tabs('exists', text)) {
