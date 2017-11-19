@@ -1,6 +1,14 @@
-drop table PMS_PRODUCT_MAIN_TYPE cascade constraints;
-alter table PMS_PRODUCT_MAIN_TYPE drop constraint ID_PRODUCT_MAIN_TYPE_PK_KEY cascade
-
+--判断表是否存在，如果存在则删除
+declare 
+	num number; 
+begin 
+	select count(1) into num from all_tables where TABLE_NAME = 'PMS_PRODUCT_MAIN_TYPE'; 
+	if   num=1   then 
+		execute immediate 'alter table PMS_PRODUCT_MAIN_TYPE drop constraint ID_PRODUCT_MAIN_TYPE_PK_KEY cascade';
+	    execute immediate 'drop table PMS_PRODUCT_MAIN_TYPE cascade constraints';
+	end if; 
+end;
+/
 create table PMS_PRODUCT_MAIN_TYPE
 (
   id_product_main_type_pk varchar2(32) default sys_guid() not null,
@@ -16,14 +24,7 @@ create table PMS_PRODUCT_MAIN_TYPE
   date_created timestamp not null,
   updated_by varchar2(100) default 'system' not null,
   date_updated timestamp not null
-)
-tablespace PMSDATA
-  storage
-  (
-    initial 64K
-    minextents 1
-    maxextents unlimited
-  );
+);
 -- Add comments to the table 
 comment on table PMS_PRODUCT_MAIN_TYPE is '产品主体表';
 -- Add comments to the columns 

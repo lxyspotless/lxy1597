@@ -1,6 +1,14 @@
-drop table PMS_UM_INFO cascade constraints;
-alter table PMS_UM_INFO drop constraint ID_UM_PK_KEY cascade
-
+--判断表是否存在，如果存在则删除
+declare 
+	num number; 
+begin 
+	select count(1) into num from all_tables where TABLE_NAME = 'PMS_UM_INFO'; 
+	if   num=1   then 
+		execute immediate 'alter table PMS_UM_INFO drop constraint ID_UM_PK_KEY cascade';
+	    execute immediate 'drop table PMS_UM_INFO cascade constraints';
+	end if; 
+end;
+/
 create table PMS_UM_INFO
 (
   id_um_pk varchar2(32) default sys_guid() not null,
@@ -16,14 +24,7 @@ create table PMS_UM_INFO
   date_created timestamp not null,
   updated_by varchar2(100) default 'system' not null,
   date_updated timestamp not null
-)
-tablespace PMSDATA
-  storage
-  (
-    initial 64K
-    minextents 1
-    maxextents unlimited
-  );
+);
 -- Add comments to the table 
 comment on table PMS_UM_INFO is 'UM信息';
 -- Add comments to the columns 

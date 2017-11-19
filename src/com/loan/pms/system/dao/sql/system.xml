@@ -29,7 +29,6 @@
    			and pri.status = 'Y'
  			start with pri.parent_code is null
 			connect by prior pri.right_code = pri.parent_code
-			order by pri.right_code
     </select>
     
     <select id="queryDicCodeItem" parameterType="java.lang.String" resultType="java.util.Map">

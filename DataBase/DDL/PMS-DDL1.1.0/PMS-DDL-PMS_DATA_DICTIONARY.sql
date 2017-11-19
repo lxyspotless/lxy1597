@@ -1,6 +1,25 @@
-drop table PMS_DATA_DICTIONARY cascade constraints;
-alter table PMS_DATA_DICTIONARY drop constraint ID_DATA_DICTIONARY_PK_KEY cascade
-
+--判断表是否存在，如果存在则删除
+declare 
+	num number; 
+begin 
+	select count(1) into num from all_tables where TABLE_NAME = 'PMS_DATA_DICTIONARY'; 
+	if   num=1   then 
+		execute immediate 'alter table PMS_DATA_DICTIONARY drop constraint ID_DATA_DICTIONARY_PK_KEY cascade';
+	    execute immediate 'drop table PMS_DATA_DICTIONARY cascade constraints';
+	end if; 
+end;
+/
+--判断表是否存在，如果存在则删除
+declare 
+	num number; 
+begin 
+	select count(1) into num from all_tables where TABLE_NAME = 'PMS_DATA_DICTIONARY'; 
+	if   num=1   then 
+		execute immediate 'alter table PMS_DATA_DICTIONARY drop constraint ID_DATA_DICTIONARY_PK_KEY cascade';
+	    execute immediate 'drop table PMS_DATA_DICTIONARY cascade constraints';
+	end if; 
+end;
+/
 create table PMS_DATA_DICTIONARY
 (
   id_data_dictionary_pk varchar2(32) default sys_guid() not null,
@@ -22,14 +41,7 @@ create table PMS_DATA_DICTIONARY
   date_created timestamp not null,
   updated_by varchar2(100) default 'system' not null,
   date_updated timestamp not null
-)
-tablespace PMSDATA
-  storage
-  (
-    initial 64K
-    minextents 1
-    maxextents unlimited
-  );
+);
 -- Add comments to the table 
 comment on table PMS_DATA_DICTIONARY is '数据字典表';
 -- Add comments to the columns 
