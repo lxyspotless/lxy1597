@@ -51,17 +51,22 @@ define(function(require, exports, module){
 			    	width: '150'
 			    }
 			    ]
-			        ],
-			    queryParam:{
-			    	businessLine:'',
-			    	saleProductName:''
-			    },
-			    loadFilter: details/*,
-			    toolbar:[{
+			],
+		    queryParam:{
+		    	businessLine:'',
+		    	saleProductName:''
+		    },
+		    loadFilter: details,
+		    toolbar:[{
 			    	iconCls: 'icon-search',
 			    	text: '查询',
 			    	handler: querySaleProductList
-			    }]*/
+			    },{
+			    	iconCls: 'icon-reload',
+			    	text: '清空',
+			    	handler: clearSaleProductInput
+			    },
+		    ]
 		});
 	};
 	
@@ -69,4 +74,20 @@ define(function(require, exports, module){
 		return data;
 	}
 	
+	function querySaleProductList(){
+		var businessLine = $('#saleProductList_businessLine').combobox('getValue')==undefined?'':$('#saleProductList_businessLine').combobox('getValue');
+		var saleProductName = $.trim($('#saleProductList_saleProductName').val());
+		$dg.datagrid({
+			url:'./querySaleProductList.do',
+			queryParams:{
+		    	businessLine:businessLine,
+		    	saleProductName:saleProductName
+		    }
+		});
+	}
+
+	function clearSaleProductInput(){
+		$('#saleProductList_businessLine').combobox('clear');
+		$('#saleProductList_saleProductName').val('');
+	}
 })

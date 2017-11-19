@@ -20,13 +20,13 @@
 	       ppmt.date_updated            as "dateUpdated"
 	  	from pms_product_main_type ppmt 
 	  	<where>
-		  	<if test="businessLine != null">
+		  	<if test="businessLine != null and businessLine != ''">
 	        	ppmt.business_line = #{businessLine}
 	    	</if> 
-		  	<if test="productType != null">
-	        	and ppmt.product_type like '%'||#{productType}||'%'
+		  	<if test="productType != null and productType != ''">
+	        	and ppmt.product_type = #{productType}
 	    	</if> 
-		  	<if test="productName != null">
+		  	<if test="productName != null and productName != ''">
 	        	and ppmt.product_name like '%'||#{productName}||'%'
 	    	</if> 
 	    </where>
