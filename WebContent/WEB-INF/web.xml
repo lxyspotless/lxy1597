@@ -93,7 +93,7 @@
   	<!-- 登录超时时间-分钟 -->
   	<init-param>
   		<param-name>loginOutTimeMin</param-name>
-  		<param-value>10</param-value>
+  		<param-value>1</param-value>
   	</init-param>
   </filter>
   <!-- 拦截所有请求 -->

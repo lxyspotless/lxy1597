@@ -85,7 +85,9 @@ public class SystemController {
 	
 	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
 	public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException{
-		// 用户退出，将session销毁
+		// 用户退出，将session内容清除
+		request.getSession().removeAttribute(SystemFinal.LOGIN_USERNAME);
+		request.getSession().removeAttribute(SystemFinal.LAST_ACTIVE_TIME);
 		request.getSession().invalidate();
 		response.sendRedirect("login.jsp");
 		logger.info("exist system");

@@ -99,7 +99,6 @@
 				
 			},
 			complete: function(XMLHttpRequest, status){
-				debugger;
 				var response = XMLHttpRequest.responseText.substr(0,20);
 				if(response == '{sessionOutOfTime:0}'){
 					top.location.href = 'login.jsp';

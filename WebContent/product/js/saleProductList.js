@@ -62,7 +62,7 @@ define(function(require, exports, module){
 			    	text: '查询',
 			    	handler: querySaleProductList
 			    },{
-			    	iconCls: 'icon-reload',
+			    	iconCls: 'icon-remove',
 			    	text: '清空',
 			    	handler: clearSaleProductInput
 			    },

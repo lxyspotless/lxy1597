@@ -24,7 +24,9 @@ public class SessionTimeOutFilter extends OncePerRequestFilter {
 			String loginOutTimeMin = this.getFilterConfig().getInitParameter("loginOutTimeMin");
 			if(!StringUtils.isEmpty(loginOutTimeMin)){
 				if(lastActiveTime + Long.parseLong(loginOutTimeMin)*60*1000 < System.currentTimeMillis()){
-					// 超时，销毁session并跳转登录页面
+					// 超时，清空session并跳转登录页面
+					request.getSession().removeAttribute(SystemFinal.LOGIN_USERNAME);
+					request.getSession().removeAttribute(SystemFinal.LAST_ACTIVE_TIME);
 					request.getSession().invalidate();
 					PrintWriter writer = response.getWriter();
 					writer.print("{sessionOutOfTime:0}");
