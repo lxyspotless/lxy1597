@@ -39,7 +39,7 @@
 			<div style="margin-top:20px; margin-left:80%">
 				<a id='userName' data-option="plain:true" target="_top" >欢迎你：${userName}&nbsp;&nbsp;&nbsp;</a>
 				<a id='logoutLink' href="javascript:void(0);" class="easyui-linkbutton" data-option="plain:true" target="_top"
-					onclick="top.location.href='logout.do'" style="color:#FF0000; ">注销</a>
+					onclick="javascript:location.replace('logout.do')" style="color:#FF0000; ">注销</a>
 			</div>
 		</div>
 		
@@ -101,7 +101,7 @@
 			complete: function(XMLHttpRequest, status){
 				var response = XMLHttpRequest.responseText.substr(0,20);
 				if(response == '{sessionOutOfTime:0}'){
-					top.location.href = 'login.jsp';
+					javascript:location.replace('logout.do');
 				}
 			}
 		})

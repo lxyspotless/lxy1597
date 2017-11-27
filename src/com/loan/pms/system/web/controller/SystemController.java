@@ -30,57 +30,67 @@ public class SystemController {
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
 		logger.info("Login system - begin");
 		String user = (String)request.getSession().getAttribute(SystemFinal.LOGIN_USERNAME);
+		String isSeesionTimeOut = (String)request.getSession().getAttribute(SystemFinal.IS_SESSION_TIME_OUT);
+		ModelAndView mAndView = new ModelAndView();
+		// 登录已超时
+		if(!StringUtils.isEmpty(isSeesionTimeOut)){
+			logger.info("Login session time out");
+			request.getSession().invalidate();
+			mAndView.setViewName("login");
 		// 已登录则直接跳转
-		if(!StringUtils.isEmpty(user)){
-			ModelAndView mav = new ModelAndView();
+		}else if(!StringUtils.isEmpty(user)){
+			logger.info("Already Login"+user);
 			String userName = systemService.queryUserName(user);
 			List<SystemMenuDTO> menuList = systemService.querySystemMenuList();
 			//indexView.view主布局名称
-			mav.setViewName("indexView.view");
-			mav.addObject("userName",userName);
-			mav.addObject("menuList",menuList);
-			return mav;
-		}
-		// 获取登录账号密码
-		String loginUserName = request.getParameter(SystemFinal.LOGIN_USERNAME);
-		String loginPassWord = request.getParameter(SystemFinal.LOGIN_PASSWORD);
-		String failedMsg = "";
-		String userName = "";
-		List<SystemMenuDTO> menuList = new ArrayList<SystemMenuDTO>();
-		// 判断账号密码是否有错
-		if(StringUtils.isEmpty(loginUserName)){
-			failedMsg = SystemFinal.LOGIN_ERROR_USER_NULL;
-		}else if(StringUtils.isEmpty(loginPassWord)){
-			failedMsg = SystemFinal.LOGIN_ERROR_PASS_NULL;
-		}else{
-			userName = systemService.loginSystem(loginUserName, loginPassWord);
-			if(StringUtils.isEmpty(userName)){
-				failedMsg = SystemFinal.LOGIN_ERROR_LOGIN_FAILED;
+			mAndView.setViewName("indexView.view");
+			mAndView.addObject("userName",userName);
+			mAndView.addObject("menuList",menuList);
+		}else{	// 正常登录
+			// 获取登录账号密码
+			String loginUserName = request.getParameter(SystemFinal.LOGIN_USERNAME);
+			String loginPassWord = request.getParameter(SystemFinal.LOGIN_PASSWORD);
+			String failedMsg = "";
+			String userName = "";
+			List<SystemMenuDTO> menuList = new ArrayList<SystemMenuDTO>();
+			// 判断账号密码是否有错
+			if(StringUtils.isEmpty(loginUserName)){
+				// 账户名不能为空
+				failedMsg = SystemFinal.LOGIN_ERROR_USER_NULL;
+			}else if(StringUtils.isEmpty(loginPassWord)){
+				// 登录密码不能为空
+				failedMsg = SystemFinal.LOGIN_ERROR_PASS_NULL;
 			}else{
-				// 登录成功，将用户名写入session
-				request.getSession().setAttribute(SystemFinal.LOGIN_USERNAME, loginUserName);
-				// 将当前时间写入session
-				request.getSession().setAttribute(SystemFinal.LAST_ACTIVE_TIME, System.currentTimeMillis());
+				userName = systemService.loginSystem(loginUserName, loginPassWord);
+				if(StringUtils.isEmpty(userName)){
+					// 账号密码错误
+					failedMsg = SystemFinal.LOGIN_ERROR_LOGIN_FAILED;
+				}else{
+					// 登录成功，将用户名写入session
+					request.getSession().setAttribute(SystemFinal.LOGIN_USERNAME, loginUserName);
+					// 将当前时间写入session
+					request.getSession().setAttribute(SystemFinal.LAST_ACTIVE_TIME, System.currentTimeMillis());
+					// 去除登录已超时
+					request.getSession().removeAttribute(SystemFinal.IS_SESSION_TIME_OUT);
+				}
+			}
+			// 根据failedMsg是否为空判断登录是否成功
+			if(StringUtils.isEmpty(failedMsg)){
+				logger.info("login system success:"+loginUserName);
+				//indexView.view主布局名称
+				mAndView.setViewName("indexView.view");
+				menuList = systemService.querySystemMenuList();
+				mAndView.addObject("menuList",menuList);
+				mAndView.addObject("userName",userName);
+			} else {
+				// 登录失败
+				logger.info("login system failed:"+loginUserName);
+				mAndView.setViewName("login");
+				mAndView.addObject("faildMsg",failedMsg);
 			}
 		}
-		// 根据错误信息failedMsg判断要返回的页面
-		ModelAndView mav = new ModelAndView();
-		// 根据failedMsg是否为空判断登录是否成功
-		if(StringUtils.isEmpty(failedMsg)){
-			logger.info("login system success:"+loginUserName);
-			//indexView.view主布局名称
-			mav.setViewName("indexView.view");
-			menuList = systemService.querySystemMenuList();
-			mav.addObject("menuList",menuList);
-			mav.addObject("userName",userName);
-		} else {
-			// 登录失败
-			logger.info("login system failed:"+loginUserName);
-			mav.setViewName("login");
-			mav.addObject("faildMsg",failedMsg);
-		}
 		logger.info("Login system - end");
-		return mav;
+		return mAndView;
 	}
 	
 	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
@@ -90,6 +100,8 @@ public class SystemController {
 		request.getSession().removeAttribute(SystemFinal.LAST_ACTIVE_TIME);
 		request.getSession().invalidate();
 		response.sendRedirect("login.jsp");
+		ModelAndView mAndView = new ModelAndView();
+		mAndView.setViewName("login");
 		logger.info("exist system");
 		return;
 	}
@@ -98,11 +110,11 @@ public class SystemController {
 	public ModelAndView forwardView(HttpServletRequest request, HttpServletResponse response){
 		String view = request.getParameter("view");
 		logger.info("页面：" + view);
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mAndView = new ModelAndView();
 		if(!StringUtils.isEmpty(view)) {
-			mav.setViewName(view);
+			mAndView.setViewName(view);
 		}
-		return mav;
+		return mAndView;
 	}
 
 	@RequestMapping(value = "/queryDicCodeItem.json", method = RequestMethod.GET)

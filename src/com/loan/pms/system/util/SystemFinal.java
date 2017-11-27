@@ -14,4 +14,8 @@ public interface SystemFinal {
 	
 	// 登录用户上次动作时间
 	public final String LAST_ACTIVE_TIME = "lastActiveTime";
+	// 登录是否超时
+	public final String IS_SESSION_TIME_OUT = "IsSessionTimeOut";
+	// 标识YES
+	public final String YES = "Y";
 }

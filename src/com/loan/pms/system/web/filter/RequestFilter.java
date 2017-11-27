@@ -20,7 +20,7 @@ public class RequestFilter extends OncePerRequestFilter {
 		String contextPath = request.getContextPath();
 		String url = requestUrl.substring(contextPath.length());
 		String userName = (String) request.getSession().getAttribute(SystemFinal.LOGIN_USERNAME);
-		// 未登&需拦截请求，重定向到登录界面
+		// 未登陆&需拦截请求，重定向到登录界面
 		if(StringUtils.isEmpty(userName) && !isExcludedUrl(url)){
 			request.getSession().removeAttribute(SystemFinal.LOGIN_USERNAME);
 			request.getSession().removeAttribute(SystemFinal.LAST_ACTIVE_TIME);
