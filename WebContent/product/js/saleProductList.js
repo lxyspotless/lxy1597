@@ -9,10 +9,10 @@ define(function(require, exports, module){
 		});
 		
 		tb.find('#saleProductList_businessLine').combobox({
-			url : './queryDicCodeItem.json?codeNo=BusinessLine',
+			url : './queryDictionaryCodeItem.json?codeNo=BusinessLine',
 			method : 'get',
-			valueField: 'ITEMNO',
-			textField: 'ITEMNAME',
+			valueField: 'itemNo',
+			textField: 'itemName',
 			editable: false,
 			panelHeight: 'auto'
 		});

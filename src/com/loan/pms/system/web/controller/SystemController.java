@@ -3,13 +3,11 @@ package com.loan.pms.system.web.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.loan.pms.system.dto.SystemMenuDTO;
 import com.loan.pms.system.service.SystemService;
@@ -84,7 +82,7 @@ public class SystemController {
 				mAndView.addObject("userName",userName);
 			} else {
 				// 登录失败
-				logger.info("login system failed:"+loginUserName);
+				logger.info(loginUserName+"login system failed:"+failedMsg);
 				mAndView.setViewName("login");
 				mAndView.addObject("faildMsg",failedMsg);
 			}
@@ -117,15 +115,4 @@ public class SystemController {
 		return mAndView;
 	}
 
-	@RequestMapping(value = "/queryDicCodeItem.json", method = RequestMethod.GET)
-	@ResponseBody
-	public List<Map<String,Object>> queryDicCodeItem(HttpServletRequest request, HttpServletResponse response){
-		String codeNo = request.getParameter("codeNo");
-		List<Map<String,Object>> resultList = new ArrayList<Map<String,Object>>();
-		logger.info("查询数据字典类型:" + codeNo);
-		if(!StringUtils.isEmpty(codeNo)) {
-			resultList = systemService.queryDicCodeItem(codeNo);
-		}
-		return resultList;
-	}
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.loan.pms.product.dto.ProductInfoDTO;
+import com.loan.pms.product.dto.QuerySaleProductDTO;
 import com.loan.pms.product.service.ProductService;
 import com.loan.pms.system.web.controller.SystemController;
 
@@ -32,8 +33,16 @@ public class ProductController {
 		// 获取入参：业务条线和销售产品名称
 		String businessLine = request.getParameter("businessLine");
 		String saleProductName = request.getParameter("saleProductName");
+		String page = request.getParameter("page");
+		String rows = request.getParameter("rows");
 		logger.info(String.format("入参：业务条线:%s,销售产品名称:%s", businessLine, saleProductName));
-		List<ProductInfoDTO> list = productService.queryProductInfoList(businessLine, saleProductName);
+		QuerySaleProductDTO querySaleProductDto = new QuerySaleProductDTO();
+		querySaleProductDto.setBusinessLine(businessLine);
+		querySaleProductDto.setProductName(saleProductName);
+		querySaleProductDto.setProductType("MAIN");
+		querySaleProductDto.setPage(page);
+		querySaleProductDto.setRows(rows);
+		List<ProductInfoDTO> list = productService.queryProductInfoList(querySaleProductDto);
 		logger.info("/querySaleProductList.do - end");
 		return list;
 	}

@@ -30,14 +30,4 @@
  			start with pri.parent_code is null
 			connect by prior pri.right_code = pri.parent_code
     </select>
-    
-    <select id="queryDicCodeItem" parameterType="java.lang.String" resultType="java.util.Map">
-        select pdd.code_no as codeNo, 
-        	pdd.code_name as codeName, 
-        	pdd.item_no as itemNo, 
-        	pdd.item_name as itemName, 
-        	pdd.sort_no as sortNo
-  		from pms_data_dictionary pdd
- 		where pdd.code_no = #{codeNo}
-    </select>
 </mapper>

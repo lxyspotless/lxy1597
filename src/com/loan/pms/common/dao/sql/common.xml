@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.loan.pms.common.dao.CommonDao">
+    
+    <select id="queryDictionaryCodeItem" parameterType="java.lang.String" resultType="com.loan.pms.common.dto.DataDictionaryDTO">
+        select pdd.code_no as codeNo, 
+        	pdd.code_name as codeName, 
+        	pdd.item_no as itemNo, 
+        	pdd.item_name as itemName, 
+        	pdd.sort_no as sortNo
+  		from pms_data_dictionary pdd
+ 		where pdd.code_no = #{codeNo}
+    </select>
+</mapper>

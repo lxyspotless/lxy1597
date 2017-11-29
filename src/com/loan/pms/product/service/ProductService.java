@@ -3,6 +3,7 @@ package com.loan.pms.product.service;
 import java.util.List;
 
 import com.loan.pms.product.dto.ProductInfoDTO;
+import com.loan.pms.product.dto.QuerySaleProductDTO;
 
 public interface ProductService {
 	
@@ -14,6 +15,6 @@ public interface ProductService {
 	 * @return saleProductName
 	 * @return List<ProductInfoDTO>
 	 */
-	public List<ProductInfoDTO> queryProductInfoList(String businessLine, String saleProductName);
+	public List<ProductInfoDTO> queryProductInfoList(QuerySaleProductDTO querySaleProductDto);
 	
 }

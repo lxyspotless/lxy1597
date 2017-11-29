@@ -14,7 +14,11 @@
   		<param-value>UTF-8</param-value>
   	</init-param>
   </filter>
-  
+  <filter-mapping>
+  	<filter-name>characterEncodingFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+
   <!-- 初始页面 -->
   <display-name>springMvc</display-name>
   <welcome-file-list>
@@ -29,6 +33,7 @@
   		<form-error-page>/layout/error.jsp</form-error-page>
   	</form-login-config>
   </login-config>
+  
   <!-- 出错页面 -->
   <error-page>
   	<exception-type>java.lang.Throwable</exception-type>
@@ -46,6 +51,7 @@
     <!-- 随Servlet容器一起启动 -->
     <load-on-startup>1</load-on-startup>
   </servlet>
+  
   <!-- .do、.json结尾的请求映射到DispatcherServlet -->
   <servlet-mapping>
     <servlet-name>dispatcher</servlet-name>
@@ -80,6 +86,7 @@
   		<param-value>GET,POST,PUT</param-value>
   	</init-param>
   </filter>
+  
   <!-- 拦截所有请求 -->
   <filter-mapping>
   	<filter-name>requestFilter</filter-name>
@@ -96,6 +103,7 @@
   		<param-value>10</param-value>
   	</init-param>
   </filter>
+  
   <!-- 拦截所有请求 -->
   <filter-mapping>
   	<filter-name>sessionTimeOutFilter</filter-name>

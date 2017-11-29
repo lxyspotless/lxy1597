@@ -4,33 +4,42 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.loan.pms.product.dao.ProductDao">
-    <select id="queryProductInfoList" parameterType="java.util.Map" resultType="com.loan.pms.product.dto.ProductInfoDTO">
-        select ppmt.id_product_main_type_pk as "id",
-	       ppmt.business_owner          as "businessOwner",
-	       ppmt.business_line           as "businessLine",
-	       ppmt.product_type            as "productType",
-	       ppmt.product_no              as "productNo",
-	       ppmt.product_name            as "productName",
-	       ppmt.parent_product_no       as "parentProductNo",
-	       ppmt.dept_code               as "deptCode",
-	       ppmt.remark                  as "remark",
-	       ppmt.created_by              as "createdBy",
-	       ppmt.date_created            as "dateCreated",
-	       ppmt.updated_by              as "updatedBy",
-	       ppmt.date_updated            as "dateUpdated"
-	  	from pms_product_main_type ppmt 
-	  	<where>
-		  	<if test="businessLine != null and businessLine != ''">
-	        	ppmt.business_line = #{businessLine}
-	    	</if> 
-		  	<if test="productType != null and productType != ''">
-	        	and ppmt.product_type = #{productType}
-	    	</if> 
-		  	<if test="productName != null and productName != ''">
-	        	and ppmt.product_name like '%'||#{productName}||'%'
-	    	</if> 
-	    </where>
-  		order by ppmt.product_no
+    <select id="queryProductInfoList" parameterType="com.loan.pms.product.dto.QuerySaleProductDTO" 
+    			resultType="com.loan.pms.product.dto.ProductInfoDTO">
+    	select *
+    	from
+	    	(select A.*, ROWNUM RN 
+	    	from (
+		        select ppmt.id_product_main_type_pk as "id",
+			       ppmt.business_owner          as "businessOwner",
+			       ppmt.business_line           as "businessLine",
+			       ppmt.product_type            as "productType",
+			       ppmt.product_no              as "productNo",
+			       ppmt.product_name            as "productName",
+			       ppmt.parent_product_no       as "parentProductNo",
+			       ppmt.dept_code               as "deptCode",
+			       ppmt.remark                  as "remark",
+			       ppmt.created_by              as "createdBy",
+			       ppmt.date_created            as "dateCreated",
+			       ppmt.updated_by              as "updatedBy",
+			       ppmt.date_updated            as "dateUpdated"
+			  	from pms_product_main_type ppmt 
+			  	<where>
+				  	<if test="businessLine != null and businessLine != ''">
+			        	ppmt.business_line = #{businessLine}
+			    	</if> 
+				  	<if test="productType != null and productType != ''">
+			        	and ppmt.product_type = #{productType}
+			    	</if> 
+				  	<if test="productName != null and productName != ''">
+			        	and ppmt.product_name like '%'||#{productName}||'%'
+			    	</if> 
+			    </where>
+		  		order by ppmt.product_no) A
+		  	<![CDATA[
+		  	where ROWNUM <= #{page} * #{rows})
+	  	where RN > (#{page} - 1) * #{rows}
+	  	]]>
     </select>
     
 </mapper>

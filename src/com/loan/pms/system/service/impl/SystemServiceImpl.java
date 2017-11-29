@@ -68,10 +68,4 @@ public class SystemServiceImpl implements SystemService {
 		}
 		return resultMenuList;
 	}
-
-	@Override
-	public List<Map<String, Object>> queryDicCodeItem(String codeNo) {
-		return systemDao.queryDicCodeItem(codeNo);
-	}
-
 }

@@ -26,11 +26,4 @@ public interface SystemDao {
 	 * @return List<Map<String, Object>>
 	 */
 	public List<SystemMenuDTO> querySystemMenuList();
-	
-	/**
-	 * 查询数据字典下该codeNo所有数据
-	 * @param codeNo
-	 * @return List<Map<String,Object>>
-	 */
-	public List<Map<String,Object>> queryDicCodeItem(String codeNo);
 }
