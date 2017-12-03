@@ -22,7 +22,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<ProductInfoDTO> queryProductInfoList(QuerySaleProductDTO querySaleProductDto) {
 		List<ProductInfoDTO> list = productDao.queryProductInfoList(querySaleProductDto);
-		logger.info("查询销售产品条数:" + list.size());
+		logger.info("查询产品大类条数:" + list.size());
 		return list;
 	}
 	
