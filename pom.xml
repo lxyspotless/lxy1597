@@ -43,7 +43,7 @@
 		<getui.base.version>4.0.0.10</getui.base.version>
 		<jackson-core-asl.version>1.9.2</jackson-core-asl.version>
 		<protobuf.version>2.5.0</protobuf.version>
-		<org.springframework.version>3.0.2.RELEASE</org.springframework.version>
+		<org.springframework.version>3.2.3.RELEASE</org.springframework.version>
 		<validation.version>1.0.0.GA</validation.version>
 		<aspectjrt.version>1.8.5</aspectjrt.version>
 		<aopalliance.version>1.0</aopalliance.version>
@@ -236,6 +236,11 @@
 		    <artifactId>fastjson</artifactId>
 		    <version>1.2.11</version>
 		</dependency>
-		
+		<!-- quartz -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>1.8.6</version>
+		</dependency>
 	</dependencies>
 </project>

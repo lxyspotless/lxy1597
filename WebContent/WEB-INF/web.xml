@@ -63,6 +63,9 @@
   </servlet-mapping>
   
   <!-- 装载log4j -->
+  <!-- <listener>
+	<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+  </listener>
   <context-param>
 	<param-name>contextConfigLocation</param-name>
 	<param-value>/WEB-INF/config/log4j.properties</param-value>
@@ -70,10 +73,7 @@
   <context-param>
     <param-name>log4jRefreshInterval</param-name>
     <param-value>10000</param-value>
-  </context-param>
-  <listener>
-	<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
-  </listener>
+  </context-param> -->
   
   <!-- 装载容器 -->
   <listener>
