@@ -28,4 +28,16 @@ public interface SystemService {
 	 * @return menuList
 	 */
 	public List<SystemMenuDTO> querySystemMenuList();
+	
+	/**
+	 * 获取登录用户
+	 * @return
+	 */
+	public String getLoginUser();
+	
+	/**
+	 * 设置登录用户
+	 * @param loginUser
+	 */
+	public void setLoginUser(String loginUser);
 }

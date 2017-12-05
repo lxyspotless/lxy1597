@@ -1,4 +1,4 @@
-package com.loan.pms.common.utils;
+package com.loan.pms.common.util;
 
 public interface CommonFinal {
 	// true

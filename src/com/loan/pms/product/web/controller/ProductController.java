@@ -26,7 +26,7 @@ public class ProductController {
 	@Resource(name = ProductService.SERVICE_ID)
 	private ProductService productService;
 	
-	@RequestMapping(value = "/querySaleProductList.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/querySaleProductList.json", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ProductInfoDTO> querySaleProductList(HttpServletRequest request, HttpServletResponse response) {
 		logger.info("/querySaleProductList.do - begin");

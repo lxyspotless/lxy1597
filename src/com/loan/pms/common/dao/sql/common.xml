@@ -5,6 +5,12 @@
 
 <mapper namespace="com.loan.pms.common.dao.CommonDao">
     
+    <select id="queryDictionaryCode" resultType="java.lang.String">
+        select distinct pdd.code_no as codeNo
+  		from pms_data_dictionary pdd
+ 		where is_effective='Y'
+    </select>
+    
     <select id="queryDictionaryCodeItem" parameterType="java.lang.String" resultType="com.loan.pms.common.dto.DataDictionaryDTO">
         select pdd.code_no as codeNo, 
         	pdd.code_name as codeName, 
@@ -13,5 +19,6 @@
         	pdd.sort_no as sortNo
   		from pms_data_dictionary pdd
  		where pdd.code_no = #{codeNo}
+ 			and is_effective='Y'
     </select>
 </mapper>

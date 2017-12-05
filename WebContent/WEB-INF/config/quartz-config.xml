@@ -30,7 +30,7 @@
     </bean>
     
     <!-- 定时任务:刷新数据字典到内存 -->
-    <bean id="refreshDataDictionaryMemory" class="com.loan.pms.quartz.job.RefreshDataDictionaryMemory">
+    <bean id="refreshDataDictionaryMemory" class="com.loan.pms.quartz.job.RefreshDataDictionaryMemoryJob">
     	<property name="lockMins">
     		<value>${pms.refreshDataDictionaryMemory.lockMins}</value>
     	</property>

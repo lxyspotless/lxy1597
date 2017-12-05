@@ -18,7 +18,7 @@ define(function(require, exports, module){
 		});
 		
 		$dg = tb.find('#saleProductListDataTable').datagrid({
-			url: './querySaleProductList.do',
+			url: './querySaleProductList.json',
 			singleSelect: true, //只允许选择一行
 			fitColumns: false,	//自动展开
 			striped: true,		//斑马线效果

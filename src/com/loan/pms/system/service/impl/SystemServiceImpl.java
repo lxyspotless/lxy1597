@@ -21,6 +21,7 @@ public class SystemServiceImpl implements SystemService {
 	
 	private static Logger logger = Logger.getLogger(SystemServiceImpl.class);
 	
+	private String loginUser = "";
 	
 	@Override
 	public String loginSystem(String loginUserName, String loginPassWord) {
@@ -67,5 +68,15 @@ public class SystemServiceImpl implements SystemService {
 			logger.info("系统菜单数:"+menuList.size());
 		}
 		return resultMenuList;
+	}
+	
+	@Override
+	public String getLoginUser() {
+		return loginUser;
+	}
+
+	@Override
+	public void setLoginUser(String loginUser) {
+		this.loginUser = loginUser;
 	}
 }

@@ -6,6 +6,12 @@ import com.loan.pms.common.dto.DataDictionaryDTO;
 public interface CommonDao {
 	
 	/**
+	 * 查询数据字典下所有codeNo
+	 * @return List<String>
+	 */
+	public List<String> queryDictionaryCode();
+	
+	/**
 	 * 查询数据字典下该codeNo所有数据
 	 * @param codeNo
 	 * @return List<Map<String,Object>>

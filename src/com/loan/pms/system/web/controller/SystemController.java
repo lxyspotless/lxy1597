@@ -70,6 +70,8 @@ public class SystemController {
 					request.getSession().setAttribute(SystemFinal.LAST_ACTIVE_TIME, System.currentTimeMillis());
 					// 去除登录已超时
 					request.getSession().removeAttribute(SystemFinal.IS_SESSION_TIME_OUT);
+					// 设置登录用户
+					systemService.setLoginUser(userName);
 				}
 			}
 			// 根据failedMsg是否为空判断登录是否成功
@@ -100,6 +102,8 @@ public class SystemController {
 		response.sendRedirect("login.jsp");
 		ModelAndView mAndView = new ModelAndView();
 		mAndView.setViewName("login");
+		// 清空登录用户
+		systemService.setLoginUser(null);
 		logger.info("exist system");
 		return;
 	}
