@@ -16,7 +16,7 @@ public abstract class QuartzBaseJob {
 	
 	public void execute(){
 		// 开关已打开且系统已登录
-		if(CommonFinal.TRUE.equals(quartzSwitch)){
+		if(CommonFinal.TRUE.equals(quartzSwitch) && lockMins > 0){
 			logger.info("定时任务开始:"+this.getClass().getName());
 			try {
 				doJob();
