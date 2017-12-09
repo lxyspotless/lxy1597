@@ -56,8 +56,8 @@ comment on column PMS_DATA_DICTIONARY.date_updated is 'ÐÞ¸ÄÊ±¼ä';
 -- Create/Recreate primary, unique and foreign key constraints
 create unique index IDX_ID_DATA_DICTIONARY ON PMS_DATA_DICTIONARY(id_data_dictionary) initrans 16;
 alter table PMS_DATA_DICTIONARY add constraint PK_ID_DATA_DICTIONARY primary key (id_data_dictionary) using index IDX_ID_DATA_DICTIONARY;
--- Create index
-create index IDX_ID_CODE_NO ON PMS_DATA_DICTIONARY(code_no);
+-- Create unique index
+create unique index IDX_ID_CODE_NO ON PMS_DATA_DICTIONARY(code_no,item_no);
 -- Grant object privileges
 grant select,insert,update,delete on PMS_DATA_DICTIONARY to pmsopr;
 --Create trigger on insert

@@ -32,7 +32,7 @@
         <property name="locations">
 	        <list>
 	        	<value>/WEB-INF/config/jdbc.properties</value>
-	        	<value>/WEB-INF/config/quartz.properties</value>
+	        	<value>/WEB-INF/config/quartz-job.properties</value>
 	        </list>
 	    </property>
     </bean>

@@ -13,5 +13,6 @@
     	<mapper resource="com/loan/pms/common/dao/sql/common.xml"></mapper>
     	<mapper resource="com/loan/pms/system/dao/sql/system.xml"></mapper>
     	<mapper resource="com/loan/pms/product/dao/sql/product.xml"></mapper>
+    	<mapper resource="com/loan/pms/quartz/dao/sql/quartzJob.xml"></mapper>
     </mappers>
 </configuration>

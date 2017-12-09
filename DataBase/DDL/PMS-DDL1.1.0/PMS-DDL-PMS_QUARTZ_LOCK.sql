@@ -15,9 +15,8 @@ create table PMS_QUARTZ_JOB_LOCK
   business_type varchar2(32) default 'COMMON' not null,
   target_id varchar2(100) not null,
   target_type varchar2(100) not null,
-  is_locked varchar2(1) default 'N' not null,
   locked_date timestamp,
-  expire_date timestamp,
+  expired_date timestamp,
   is_effective varchar2(32) default 'Y' not null,
   created_by varchar2(100) default 'system' not null,
   date_created timestamp not null,
@@ -31,9 +30,8 @@ comment on column PMS_QUARTZ_JOB_LOCK.id_quartz_job_lock is '主键';
 comment on column PMS_QUARTZ_JOB_LOCK.business_type is '业务主体';
 comment on column PMS_QUARTZ_JOB_LOCK.target_id is '锁目标ID';
 comment on column PMS_QUARTZ_JOB_LOCK.target_type is '锁类型';
-comment on column PMS_QUARTZ_JOB_LOCK.is_locked is '是否已锁定(Y:是,N:否)';
 comment on column PMS_QUARTZ_JOB_LOCK.locked_date is '锁定时间';
-comment on column PMS_QUARTZ_JOB_LOCK.expire_date is '失效时间';
+comment on column PMS_QUARTZ_JOB_LOCK.expired_date is '失效时间';
 comment on column PMS_QUARTZ_JOB_LOCK.is_effective is '是否有效(Y:有效,N:无效)';
 comment on column PMS_QUARTZ_JOB_LOCK.created_by is '创建人';
 comment on column PMS_QUARTZ_JOB_LOCK.date_created is '创建时间';
@@ -43,7 +41,7 @@ comment on column PMS_QUARTZ_JOB_LOCK.date_updated is '修改时间';
 create unique index IDX_ID_QUARTZ_JOB_LOCK ON PMS_QUARTZ_JOB_LOCK(id_quartz_job_lock);
 alter table PMS_QUARTZ_JOB_LOCK add constraint PK_ID_QUARTZ_JOB_LOCK primary key (id_quartz_job_lock) using index IDX_ID_QUARTZ_JOB_LOCK;
 -- Create unique index
-create unique index IDX_TARGET_ID ON PMS_QUARTZ_JOB_LOCK(target_id);
+create unique index IDX_TARGET_ID ON PMS_QUARTZ_JOB_LOCK(target_id,target_type);
 -- Grant object privileges
 grant select,insert,update,delete on PMS_QUARTZ_JOB_LOCK to pmsopr;
 --Create trigger on insert

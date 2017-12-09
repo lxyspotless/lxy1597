@@ -15,8 +15,8 @@ public class RefreshDataDictionaryMemoryJob extends QuartzBaseJob{
 	
 	@Override
 	public void doJob() {
-		logger.info("开始执行:刷新数据字典到内存");
+		logger.info("开始定时任务:刷新数据字典内存");
 		commonService.refreshDataDictionaryMemory();
-		logger.info("结束执行:刷新数据字典到内存");
+		logger.info("结束定时任务:刷新数据字典内存");
 	}
 }

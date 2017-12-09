@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.loan.pms.quartz.dao.QuartzJobDao">
+    <select id="isJobLocked" parameterType="com.loan.pms.quartz.dto.QuartzJobLockDTO" resultType="java.lang.String">
+        select target_id
+        from pms_quartz_job_lock
+        where target_id = #{targetId} and
+        	target_type = #{targetType} and
+        	<![CDATA[
+        	expired_date > sysdate and
+        	]]>
+        	is_effective = 'Y'
+    </select>
+    
+    <update id="lockJob" parameterType="com.loan.pms.quartz.dto.QuartzJobLockDTO">
+    	merge into pms_quartz_job_lock
+    	using dual x
+    	on(target_id = #{targetId} and target_type = #{targetType})
+    	when matched then
+    		update
+    			set locked_date = #{lockedDate},
+    				expired_date = #{expiredDate}
+    	when not matched then
+    		insert (
+    			target_id,
+    			target_type,
+    			locked_date,
+    			expired_date,
+    			is_effective
+    		)
+    		values
+    		(
+    			#{targetId},
+    			#{targetType},
+    			#{lockedDate,jdbcType=TIMESTAMP},
+    			#{expiredDate,jdbcType=TIMESTAMP},
+    			#{isEffective}
+    		)
+    </update>
+</mapper>
