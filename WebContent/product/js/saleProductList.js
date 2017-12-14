@@ -1,5 +1,5 @@
 define(function(require, exports, module){
-	//datagride引用
+	//datagrid引用
 	var $dg;
 	
 	exports.init = function(tb){
@@ -8,6 +8,7 @@ define(function(require, exports, module){
 			collapsible:true
 		});
 		
+		// 业务条线
 		tb.find('#saleProductList_businessLine').combobox({
 			url : './queryDictionaryCodeItem.json?codeNo=BusinessLine',
 			method : 'get',
@@ -18,7 +19,7 @@ define(function(require, exports, module){
 		});
 		
 		$dg = tb.find('#saleProductListDataTable').datagrid({
-			url: './querySaleProductList.json',
+			url: './querySaleProductInfoList.json',
 			singleSelect: true, //只允许选择一行
 			fitColumns: false,	//自动展开
 			striped: true,		//斑马线效果
@@ -49,6 +50,14 @@ define(function(require, exports, module){
 			    	field: 'dateCreated',
 			    	title: '创建时间',
 			    	width: '150'
+			    },{
+			    	field: 'updatedBy',
+			    	title: '更新人',
+			    	width: '150'
+			    },{
+			    	field: 'dateUpdated',
+			    	title: '更新时间',
+			    	width: '150'
 			    }
 			    ]
 			],
@@ -78,7 +87,7 @@ define(function(require, exports, module){
 		var businessLine = $('#saleProductList_businessLine').combobox('getValue')==undefined?'':$('#saleProductList_businessLine').combobox('getValue');
 		var saleProductName = $.trim($('#saleProductList_saleProductName').val());
 		$dg.datagrid({
-			url:'./querySaleProductList.do',
+			url:'./querySaleProductInfoList.json',
 			queryParams:{
 		    	businessLine:businessLine,
 		    	saleProductName:saleProductName
