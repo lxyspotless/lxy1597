@@ -3,7 +3,7 @@ declare
 	num number; 
 begin 
 	select count(1) into num from all_tables where TABLE_NAME = 'PMS_UM_INFO'; 
-	if   num=1   then 
+	if   num>0   then 
 		execute immediate 'alter table PMS_UM_INFO drop constraint PK_ID_UM_INFO cascade';
 	    execute immediate 'drop table PMS_UM_INFO cascade constraints';
 	end if; 
@@ -47,7 +47,7 @@ alter table PMS_UM_INFO add constraint PK_ID_UM_INFO primary key (id_um_info) us
 -- Create unique index
 create unique index IDX_UM_ID ON PMS_UM_INFO(um_id);
 -- Grant object privileges
-grant select,insert,update,delete on PMS_UM_INFO to pmsopr;
+--grant select,insert,update,delete on PMS_UM_INFO to pmsopr;
 --Create trigger on insert
 create or replace trigger TR_PMS_UM_INFO_BI
 	before insert on PMS_UM_INFO

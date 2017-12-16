@@ -3,7 +3,7 @@ declare
 	num number; 
 begin 
 	select count(1) into num from all_tables where TABLE_NAME = 'PMS_PRODUCT_MANAGEMENT'; 
-	if   num=1   then 
+	if   num>0   then 
 		execute immediate 'alter table PMS_PRODUCT_MANAGEMENT drop constraint PK_ID_PRODUCT_MANAGEMENT cascade';
 	    execute immediate 'drop table PMS_PRODUCT_MANAGEMENT cascade constraints';
 	end if; 
@@ -47,7 +47,7 @@ alter table PMS_PRODUCT_MANAGEMENT add constraint PK_ID_PRODUCT_MANAGEMENT prima
 -- Create unique index
 create unique index IDX_ID_PRODUCT_NO_MANAGEMENT ON PMS_PRODUCT_MANAGEMENT(product_no,version_no);
 -- Grant object privileges
-grant select,insert,update,delete on PMS_PRODUCT_MANAGEMENT to pmsopr;
+--grant select,insert,update,delete on PMS_PRODUCT_MANAGEMENT to pmsopr;
 --Create trigger on insert
 create or replace trigger TR_PMS_PRODUCT_MANAGEMENT_BI
 	before insert on PMS_PRODUCT_MANAGEMENT

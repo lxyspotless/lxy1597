@@ -3,7 +3,7 @@ declare
 	num number; 
 begin 
 	select count(1) into num from all_tables where TABLE_NAME = 'PMS_QUARTZ_JOB_LOCK'; 
-	if   num=1   then 
+	if   num>0   then 
 		execute immediate 'alter table PMS_QUARTZ_JOB_LOCK drop constraint PK_ID_QUARTZ_JOB_LOCK cascade';
 	    execute immediate 'drop table PMS_QUARTZ_JOB_LOCK cascade constraints';
 	end if; 
@@ -43,7 +43,7 @@ alter table PMS_QUARTZ_JOB_LOCK add constraint PK_ID_QUARTZ_JOB_LOCK primary key
 -- Create unique index
 create unique index IDX_TARGET_ID ON PMS_QUARTZ_JOB_LOCK(target_id,target_type);
 -- Grant object privileges
-grant select,insert,update,delete on PMS_QUARTZ_JOB_LOCK to pmsopr;
+--grant select,insert,update,delete on PMS_QUARTZ_JOB_LOCK to pmsopr;
 --Create trigger on insert
 create or replace trigger TR_PMS_QUARTZ_JOB_LOCK_BI
 	before insert on PMS_QUARTZ_JOB_LOCK

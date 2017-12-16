@@ -3,7 +3,7 @@ declare
 	num number; 
 begin 
 	select count(1) into num from all_tables where TABLE_NAME = 'PMS_RIGHT_INFO'; 
-	if   num=1   then 
+	if   num>0   then 
 		execute immediate 'alter table PMS_RIGHT_INFO drop constraint PK_ID_RIGHT_INFO cascade';
 	    execute immediate 'drop table PMS_RIGHT_INFO cascade constraints';
 	end if; 
@@ -43,7 +43,7 @@ alter table PMS_RIGHT_INFO add constraint PK_ID_RIGHT_INFO primary key (id_right
 -- Create unique index
 create unique index IDX_RIGHT_CODE ON PMS_RIGHT_INFO(right_code);
 -- Grant object privileges
-grant select,insert,update,delete on PMS_RIGHT_INFO to pmsopr;
+--grant select,insert,update,delete on PMS_RIGHT_INFO to pmsopr;
 --Create trigger on insert
 create or replace trigger TR_PMS_RIGHT_INFO_BI
 	before insert on PMS_RIGHT_INFO

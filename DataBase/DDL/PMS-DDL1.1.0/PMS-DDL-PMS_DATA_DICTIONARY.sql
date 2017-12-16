@@ -3,7 +3,7 @@ declare
 	num number; 
 begin 
 	select count(1) into num from all_tables where TABLE_NAME = 'PMS_DATA_DICTIONARY'; 
-	if   num=1   then 
+	if   num>0   then 
 		execute immediate 'alter table PMS_DATA_DICTIONARY drop constraint PK_ID_DATA_DICTIONARY cascade';
 	    execute immediate 'drop table PMS_DATA_DICTIONARY cascade constraints';
 	end if;
@@ -59,7 +59,7 @@ alter table PMS_DATA_DICTIONARY add constraint PK_ID_DATA_DICTIONARY primary key
 -- Create unique index
 create unique index IDX_ID_CODE_NO ON PMS_DATA_DICTIONARY(code_no,item_no);
 -- Grant object privileges
-grant select,insert,update,delete on PMS_DATA_DICTIONARY to pmsopr;
+--grant select,insert,update,delete on PMS_DATA_DICTIONARY to pmsopr;
 --Create trigger on insert
 create or replace trigger TR_PMS_DATA_DICTIONARY_BI
 	before insert on PMS_DATA_DICTIONARY
