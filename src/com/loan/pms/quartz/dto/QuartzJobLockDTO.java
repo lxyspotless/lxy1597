@@ -4,8 +4,6 @@ import java.sql.Timestamp;
 
 public class QuartzJobLockDTO {
 
-	// 业务主体
-	private String businessType;
 	// 锁目标ID
 	private String targetId;
 	// 锁类型
@@ -14,15 +12,7 @@ public class QuartzJobLockDTO {
 	private Timestamp lockedDate;
 	// 失效时间
 	private Timestamp expiredDate;
-	// 是否有效
-	private String isEffective;
 	
-	public String getBusinessType() {
-		return businessType;
-	}
-	public void setBusinessType(String businessType) {
-		this.businessType = businessType;
-	}
 	public String getTargetId() {
 		return targetId;
 	}
@@ -47,11 +37,4 @@ public class QuartzJobLockDTO {
 	public void setExpiredDate(Timestamp expiredDate) {
 		this.expiredDate = expiredDate;
 	}
-	public String getIsEffective() {
-		return isEffective;
-	}
-	public void setIsEffective(String isEffective) {
-		this.isEffective = isEffective;
-	}
-	
 }

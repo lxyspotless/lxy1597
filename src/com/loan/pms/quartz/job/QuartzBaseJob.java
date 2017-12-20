@@ -33,30 +33,25 @@ public abstract class QuartzBaseJob {
 			QuartzJobLockDTO dto = new QuartzJobLockDTO();
 			dto.setTargetId(this.getClass().getName());
 			dto.setTargetType("CommonQuartzJob");
+			// job处于非锁定状态，加锁再执行
+			Date now = new Date();// new Date()为获取当前系统时间
+			Timestamp nowStamp = new Timestamp(now.getTime());
+			Timestamp afterStamp = new Timestamp(now.getTime() + lockMins*60*1000);
+			dto.setLockedDate(nowStamp);
+			dto.setExpiredDate(afterStamp);
 			try {
-				isLocked = quartzService.isLocked(dto);
-				if(!isLocked){
-					// job处于非锁定状态，加锁再执行
-					Date now = new Date();// new Date()为获取当前系统时间
-					Timestamp nowStamp = new Timestamp(now.getTime());
-					Timestamp afterStamp = new Timestamp(now.getTime() + lockMins*60*1000);
-					dto.setLockedDate(nowStamp);
-					dto.setExpiredDate(afterStamp);
-					dto.setIsEffective(CommonFinal.Y);
-					// job加锁
-					quartzService.lockJob(dto);
+				isLocked = quartzService.lockJob(dto);
+				if(isLocked){// job加锁成功
 					// 实现类定义方法
 					doJob();
 				}
 			} catch (Exception e) {
 				logger.error(String.format("定时任务%s出错:%s",this.getClass().getName(),e.getMessage()));
 			} finally {
-				if(!isLocked){
-					// job锁失效(不管是否出错)
-					Timestamp nowStamp = new Timestamp(new Date().getTime());
-					dto.setExpiredDate(nowStamp);
-					quartzService.lockJob(dto);
-				}
+				// job锁失效(不管是否出错)
+				Timestamp nowStampExpire = new Timestamp(new Date().getTime());
+				dto.setExpiredDate(nowStampExpire);
+				quartzService.expireJob(dto);
 			}
 			logger.info("定时任务结束:"+this.getClass().getName());
 		}

@@ -6,15 +6,15 @@ public interface QuartzJobService {
 	
 	public String SERVICE_ID = "pms.quartz.QuartzJobService";
 	/**
-	 * 判断该job是否被锁定
+	 * 锁定job
 	 * @param paramMap
 	 * @return
 	 */
-	public boolean isLocked(QuartzJobLockDTO dto);
+	public boolean lockJob(QuartzJobLockDTO dto);
 	
 	/**
-	 * 锁定job
+	 * 释放job锁
 	 * @param dto
 	 */
-	public void lockJob(QuartzJobLockDTO dto);
+	public void expireJob(QuartzJobLockDTO dto);
 }

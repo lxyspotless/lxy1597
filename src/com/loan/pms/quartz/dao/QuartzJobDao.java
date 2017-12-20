@@ -5,15 +5,15 @@ import com.loan.pms.quartz.dto.QuartzJobLockDTO;
 public interface QuartzJobDao {
 
 	/**
-	 * 任务是否锁定,返回null则为否(锁释放时间小于当前时间)
+	 * 锁定job,返回Y则成功，N失败(锁释放时间大于当前时间)
 	 * @param dto
 	 * @return boolean
 	 */
-	public String isJobLocked(QuartzJobLockDTO dto);
+	public String lockJob(QuartzJobLockDTO dto);
 	
 	/**
-	 * 给job加锁
+	 * 释放job加锁
 	 * @param dto
 	 */
-	public void lockJob(QuartzJobLockDTO dto);
+	public void expireJob(QuartzJobLockDTO dto);
 }

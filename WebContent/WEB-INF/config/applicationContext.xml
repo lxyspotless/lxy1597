@@ -33,6 +33,7 @@
 	        <list>
 	        	<value>/WEB-INF/config/jdbc.properties</value>
 	        	<value>/WEB-INF/config/quartz-job.properties</value>
+	        	<value>/WEB-INF/config/redis.properties</value>
 	        </list>
 	    </property>
     </bean>
@@ -76,4 +77,6 @@
     
     <!-- 引入quartz -->
     <import resource="quartz-config.xml"/>
+    <!-- 引入redis -->
+    <import resource="redis-config.xml"/>
 </beans>
