@@ -116,7 +116,7 @@
 					isShow : true
 				}
 			}
-		}).tabs('followCustomHandle');
+		}).tabs();
 	});
 	
 	//菜单调用添加tab页方法
@@ -124,16 +124,6 @@
 		if ($('#centerArea').tabs('exists', title)){
 			$('#centerArea').tabs('select', title);
 		} else {
-			var tabManager = $('#centerArea').tabs({
-				fit : true,
-				customAttr : {
-					contextMenu : {
-						isShow : true
-					}
-				}
-			}).tabs();
-			var content = '<iframe scrolling="auto" frameborder="0"  src="' + url + '" style="width:100%;height:88%;border:0;"></iframe>';
-			var a = $.extend({href : url}, {});
 			var opts = {
 				id : tabid,
 				title : title,
@@ -147,20 +137,5 @@
 		}
 	}
 	
-	//tab页添加实现
-	function _addTab(tabid, text, options) {
-		//var id = _uniform(tabid);
-		if(tabManager.tabs('exists', text)) {
-			tabManager.tabs('select', text);
-		} else {
-			tabManager.tabs('add', $.extend({
-				id : tabid,
-				title : text,
-				closable : true,
-				helpContext : text
-			}, options));
-			tabManager.tabs('getTab', text).attr("paneltitle", text);
-		}
-	}
 </script>
 </html>
