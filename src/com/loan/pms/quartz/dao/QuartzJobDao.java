@@ -9,7 +9,7 @@ public interface QuartzJobDao {
 	 * @param dto
 	 * @return boolean
 	 */
-	public String lockJob(QuartzJobLockDTO dto);
+	public void lockJob(QuartzJobLockDTO dto);
 	
 	/**
 	 * 释放job加锁

@@ -16,8 +16,8 @@ public class QuartzJobServiceImpl implements QuartzJobService {
 	
 	@Override
 	public boolean lockJob(QuartzJobLockDTO dto) {
-		String resultStr = quartzJobDao.lockJob(dto);
-		if(CommonFinal.Y.equals(resultStr)){
+		quartzJobDao.lockJob(dto);
+		if(CommonFinal.Y.equals(dto.getIsLocked())){
 			return true;
 		}else{
 			return false;

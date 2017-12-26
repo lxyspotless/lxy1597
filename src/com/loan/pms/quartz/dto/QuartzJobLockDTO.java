@@ -12,6 +12,8 @@ public class QuartzJobLockDTO {
 	private Timestamp lockedDate;
 	// 失效时间
 	private Timestamp expiredDate;
+	// 是否锁定
+	private String isLocked;
 	
 	public String getTargetId() {
 		return targetId;
@@ -36,5 +38,11 @@ public class QuartzJobLockDTO {
 	}
 	public void setExpiredDate(Timestamp expiredDate) {
 		this.expiredDate = expiredDate;
+	}
+	public String getIsLocked() {
+		return isLocked;
+	}
+	public void setIsLocked(String isLocked) {
+		this.isLocked = isLocked;
 	}
 }

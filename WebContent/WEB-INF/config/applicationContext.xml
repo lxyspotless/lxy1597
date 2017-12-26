@@ -21,10 +21,9 @@
     
     <!-- 加载ContextLoaderListener(父WebApplicationContext) -->
     <!-- 启用 父WebApplicationContext注解 ,扫描除web包--> 
-    <!-- <context:component-scan base-package="com.loan.pms" use-default-filters="false">
-    	<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
-	</context:component-scan> -->
-	<context:component-scan base-package="com.loan.pms.**.dao, com.loan.pms.**.service, com.loan.pms.**.util, com.loan.pms.**.job, com.loan.pms.**.component" />
+	<context:component-scan base-package="com.loan.pms">
+		<context:exclude-filter type="aspectj" expression="com.loan.pms.**.web"/>
+	</context:component-scan>
     
 	<!-- 引入配置文件 -->
     <bean id="propertyConfigurer"

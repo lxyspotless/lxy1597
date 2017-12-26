@@ -43,7 +43,7 @@
     		<value>execute</value>
     	</property>
     </bean>
-    <bean id="refreshDataDictionaryMemoryTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <bean id="refreshDataDictionaryMemoryTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
     	<property name="jobDetail">
     		<ref bean="refreshDataDictionaryMemoryExecute"/>
     	</property>

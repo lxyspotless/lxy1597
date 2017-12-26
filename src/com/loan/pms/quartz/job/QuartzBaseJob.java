@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import com.loan.pms.common.util.CommonFinal;
 import com.loan.pms.quartz.dto.QuartzJobLockDTO;
 import com.loan.pms.quartz.service.QuartzJobService;
+import com.loan.pms.quartz.util.QuartzFinal;
 
 public abstract class QuartzBaseJob {
 	
@@ -32,7 +33,7 @@ public abstract class QuartzBaseJob {
 			Boolean isLocked = false;
 			QuartzJobLockDTO dto = new QuartzJobLockDTO();
 			dto.setTargetId(this.getClass().getName());
-			dto.setTargetType("CommonQuartzJob");
+			dto.setTargetType(QuartzFinal.QUARTZ_TARGET_TYPE);
 			// job处于非锁定状态，加锁再执行
 			Date now = new Date();// new Date()为获取当前系统时间
 			Timestamp nowStamp = new Timestamp(now.getTime());

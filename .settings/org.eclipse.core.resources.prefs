@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//DataBase/DDL/PMS-DDL1.1.0/PMS-DDL-PMS_DATA_DICTIONARY.sql=GBK
 encoding//DataBase/DDL/PMS-DDL1.1.0/PMS-DDL-PMS_UM_INFO.sql=GBK
 encoding//DataBase/PKG/PMS-PKG-PROC_QUARTZ_LOCK_JOB.sql=GBK
 encoding//WebContent/WEB-INF/config/jdbc.properties=UTF-8
