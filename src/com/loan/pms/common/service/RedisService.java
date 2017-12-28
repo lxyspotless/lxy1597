@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import redis.clients.jedis.JedisPool;
+
 public interface RedisService {
 	
 	public String SERVICE_ID = "pms.common.redisService";
@@ -83,4 +85,25 @@ public interface RedisService {
      * @param key
      */
     public void delete(String key);
+    
+    /**
+     * 获取Jedis连接池
+     * @return JedisPool
+     */
+    public JedisPool getJedisPool();
+    
+    /**
+     * jedisPool存值String-String，线程安全
+     * @param key
+     * @param value
+     * @return
+     */
+    public Boolean setStringToRedis(String key, String value);
+    
+    /**
+     * jedisPool获取String值，线程安全
+     * @param key
+     * @return
+     */
+    public String getStringFromRedis(String key);
 }

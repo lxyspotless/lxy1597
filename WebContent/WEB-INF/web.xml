@@ -84,7 +84,7 @@
     <param-value>10000</param-value>
   </context-param>
   
-  <!-- 自定义无需登录拦截器 -->
+  <!-- 自定义登录访问拦截器 -->
   <filter>
   	<filter-name>requestFilter</filter-name>
   	<filter-class>com.loan.pms.system.web.filter.RequestFilter</filter-class>

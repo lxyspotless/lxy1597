@@ -7,4 +7,6 @@ public interface CommonFinal {
 	public static final String FALSE = "false";
 	//Y
 	public static final String Y = "Y";
+	//OK
+	public static final String OK = "OK";
 }

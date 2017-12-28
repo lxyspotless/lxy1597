@@ -25,7 +25,7 @@
 		<context:exclude-filter type="aspectj" expression="com.loan.pms.**.web"/>
 	</context:component-scan>
     
-	<!-- 引入配置文件 -->
+	<!-- 引入资源配置文件 -->
     <bean id="propertyConfigurer"
         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
