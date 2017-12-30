@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.loan.pms.common.service.RedisService;
 import com.loan.pms.common.util.CommonFinal;
+import com.loan.pms.common.util.CommonUtil;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -112,14 +113,6 @@ public class RedisServiceImpl implements RedisService {
 	}
 
 	@Override
-	public JedisPool getJedisPool() {
-		if(null == jedisPool){
-			jedisPool = new JedisPool(jedisPoolConfig, host, Integer.parseInt(port), Integer.parseInt(timeout), password);
-		}
-		return jedisPool;
-	}
-	
-	@Override
 	public Boolean setStringToRedis(String key, String value) {
 		Jedis jedis = null;
 		// 默认失败
@@ -147,23 +140,79 @@ public class RedisServiceImpl implements RedisService {
 	public String getStringFromRedis(String key) {
 		Jedis jedis = null;
 		// 默认为空
-		String result = null;
+		String resultString = null;
 		try {
 			JedisPool jedisPool = getJedisPool();
 			jedis = jedisPool.getResource();
-			result = jedis.get(key);
-			if(null != result){
+			resultString = jedis.get(key);
+			if(null != resultString){
 				// 成功
-				logger.info("jedisPool取值成功:"+key+","+result);
+				logger.info("jedisPool取值成功:"+key+","+resultString);
 			}
 		} catch (Exception e) {
-			logger.error("jedisPool取值失败:"+key+","+result);
+			logger.error("jedisPool取值失败:"+key, e);
 		} finally {
 			if(null != jedis){
 				jedis.close();
 			}
 		}
-		return result;
+		return resultString;
+	}
+
+	@Override
+	public Boolean setObjectToRedis(String key, Object value) {
+		Jedis jedis = null;
+		// 默认失败
+		Boolean resultFlag = false;
+		try {
+			JedisPool jedisPool = getJedisPool();
+			jedis = jedisPool.getResource();
+			String result = jedis.set(key.getBytes(), CommonUtil.serialize(value));
+			if(CommonFinal.OK.equals(result)){
+				// 返回OK则成功
+				resultFlag = true;
+				logger.info("jedisPool存值成功:"+key+","+value);
+			}
+		} catch (Exception e) {
+			logger.error("jedisPool存值失败:"+key+","+value);
+		} finally {
+			if(null != jedis){
+				jedis.close();
+			}
+		}
+		return resultFlag;
+	}
+
+	@Override
+	public Object getObjectFromRedis(String key) {
+		Jedis jedis = null;
+		// 默认为空
+		Object resultObject = null;
+		try {
+			JedisPool jedisPool = getJedisPool();
+			jedis = jedisPool.getResource();
+			byte[] in = jedis.get(key.getBytes());
+			resultObject = CommonUtil.deserialize(in);
+			if(null != resultObject){
+				// 成功
+				logger.info("jedisPool取值成功:"+key+","+resultObject);
+			}
+		} catch (Exception e) {
+			logger.error("jedisPool取值失败:"+key, e);
+		} finally {
+			if(null != jedis){
+				jedis.close();
+			}
+		}
+		return resultObject;
+	}
+
+	@Override
+	public JedisPool getJedisPool() {
+		if(null == jedisPool){
+			jedisPool = new JedisPool(jedisPoolConfig, host, Integer.parseInt(port), Integer.parseInt(timeout), password);
+		}
+		return jedisPool;
 	}
 
 }

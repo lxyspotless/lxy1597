@@ -87,12 +87,6 @@ public interface RedisService {
     public void delete(String key);
     
     /**
-     * 获取Jedis连接池
-     * @return JedisPool
-     */
-    public JedisPool getJedisPool();
-    
-    /**
      * jedisPool存值String-String，线程安全
      * @param key
      * @param value
@@ -106,4 +100,26 @@ public interface RedisService {
      * @return
      */
     public String getStringFromRedis(String key);
+
+    /**
+     * jedisPool存值String-Object，线程安全
+     * @param key
+     * @param value
+     * @return
+     */
+    public Boolean setObjectToRedis(String key, Object value);
+    
+    /**
+     * jedisPool获取Object值，线程安全
+     * @param key
+     * @return
+     */
+    public Object getObjectFromRedis(String key);
+
+    /**
+     * 获取Jedis连接池
+     * @return JedisPool
+     */
+    public JedisPool getJedisPool();
+    
 }
