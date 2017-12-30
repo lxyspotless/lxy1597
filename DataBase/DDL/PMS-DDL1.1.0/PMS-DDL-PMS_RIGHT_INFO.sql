@@ -4,7 +4,6 @@ declare
 begin 
 	select count(1) into num from all_tables where TABLE_NAME = 'PMS_RIGHT_INFO'; 
 	if   num>0   then 
-		execute immediate 'alter table PMS_RIGHT_INFO drop constraint PK_ID_RIGHT_INFO cascade';
 	    execute immediate 'drop table PMS_RIGHT_INFO cascade constraints';
 	end if; 
 end;

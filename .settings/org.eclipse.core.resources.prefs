@@ -1,4 +1,10 @@
 eclipse.preferences.version=1
+encoding//DataBase/DDL/PMS-DDL1.1.0/PMS-DDL-PMS_DATA_DICTIONARY.sql=GBK
+encoding//DataBase/DDL/PMS-DDL1.1.0/PMS-DDL-PMS_PRODUCT_BASIC_INFO.sql=GBK
+encoding//DataBase/DDL/PMS-DDL1.1.0/PMS-DDL-PMS_PRODUCT_MAIN_TYPE.sql=GBK
+encoding//DataBase/DDL/PMS-DDL1.1.0/PMS-DDL-PMS_PRODUCT_MANAGEMENT.sql=GBK
+encoding//DataBase/DDL/PMS-DDL1.1.0/PMS-DDL-PMS_QUARTZ_LOCK.sql=GBK
+encoding//DataBase/DDL/PMS-DDL1.1.0/PMS-DDL-PMS_RIGHT_INFO.sql=GBK
 encoding//DataBase/DDL/PMS-DDL1.1.0/PMS-DDL-PMS_UM_INFO.sql=GBK
 encoding//WebContent/WEB-INF/config/jdbc.properties=UTF-8
 encoding//WebContent/WEB-INF/config/log4j.properties=UTF-8

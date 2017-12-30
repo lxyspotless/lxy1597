@@ -4,7 +4,6 @@ declare
 begin 
 	select count(1) into num from all_tables where TABLE_NAME = 'PMS_QUARTZ_JOB_LOCK'; 
 	if   num>0   then 
-		execute immediate 'alter table PMS_QUARTZ_JOB_LOCK drop constraint PK_ID_QUARTZ_JOB_LOCK cascade';
 	    execute immediate 'drop table PMS_QUARTZ_JOB_LOCK cascade constraints';
 	end if; 
 end;
