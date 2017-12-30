@@ -1,10 +1,9 @@
---ÅÐ¶Ï±íÊÇ·ñ´æÔÚ£¬Èç¹û´æÔÚÔòÉ¾³ý
+--ï¿½Ð¶Ï±ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½
 declare 
 	num number; 
 begin 
 	select count(1) into num from all_tables where TABLE_NAME = 'PMS_RIGHT_INFO'; 
 	if   num>0   then 
-		execute immediate 'alter table PMS_RIGHT_INFO drop constraint PK_ID_RIGHT_INFO cascade';
 	    execute immediate 'drop table PMS_RIGHT_INFO cascade constraints';
 	end if; 
 end;
@@ -24,19 +23,19 @@ create table PMS_RIGHT_INFO
   date_updated timestamp default sysdate not null
 );
 -- Add comments to the table 
-comment on table PMS_RIGHT_INFO is 'È¨ÏÞÐÅÏ¢±í';
+comment on table PMS_RIGHT_INFO is 'È¨ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½';
 -- Add comments to the columns 
-comment on column PMS_RIGHT_INFO.id_right_info is 'Ö÷¼ü';
-comment on column PMS_RIGHT_INFO.right_code is 'È¨ÏÞ´úÂë';
-comment on column PMS_RIGHT_INFO.right_name is 'È¨ÏÞÃû³Æ';
-comment on column PMS_RIGHT_INFO.parent_code is '¸¸È¨ÏÞ´úÂë';
-comment on column PMS_RIGHT_INFO.right_type is 'È¨ÏÞÀàÐÍ';
-comment on column PMS_RIGHT_INFO.right_action is 'È¨ÏÞ¶¯×÷';
-comment on column PMS_RIGHT_INFO.status is 'È¨ÏÞ×´Ì¬(Y:ÓÐÐ§,N:ÎÞÐ§)';
-comment on column PMS_RIGHT_INFO.created_by is '´´½¨ÈË';
-comment on column PMS_RIGHT_INFO.date_created is '´´½¨Ê±¼ä';
-comment on column PMS_RIGHT_INFO.updated_by is 'ÐÞ¸ÄÈË';
-comment on column PMS_RIGHT_INFO.date_updated is 'ÐÞ¸ÄÊ±¼ä';
+comment on column PMS_RIGHT_INFO.id_right_info is 'ï¿½ï¿½ï¿½ï¿½';
+comment on column PMS_RIGHT_INFO.right_code is 'È¨ï¿½Þ´ï¿½ï¿½ï¿½';
+comment on column PMS_RIGHT_INFO.right_name is 'È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+comment on column PMS_RIGHT_INFO.parent_code is 'ï¿½ï¿½È¨ï¿½Þ´ï¿½ï¿½ï¿½';
+comment on column PMS_RIGHT_INFO.right_type is 'È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+comment on column PMS_RIGHT_INFO.right_action is 'È¨ï¿½Þ¶ï¿½ï¿½ï¿½';
+comment on column PMS_RIGHT_INFO.status is 'È¨ï¿½ï¿½×´Ì¬(Y:ï¿½ï¿½Ð§,N:ï¿½ï¿½Ð§)';
+comment on column PMS_RIGHT_INFO.created_by is 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+comment on column PMS_RIGHT_INFO.date_created is 'ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½';
+comment on column PMS_RIGHT_INFO.updated_by is 'ï¿½Þ¸ï¿½ï¿½ï¿½';
+comment on column PMS_RIGHT_INFO.date_updated is 'ï¿½Þ¸ï¿½Ê±ï¿½ï¿½';
 -- Create/Recreate primary, unique and foreign key constraints 
 create unique index IDX_ID_RIGHT_INFO ON PMS_RIGHT_INFO(id_right_info);
 alter table PMS_RIGHT_INFO add constraint PK_ID_RIGHT_INFO primary key (id_right_info) using index IDX_ID_RIGHT_INFO;

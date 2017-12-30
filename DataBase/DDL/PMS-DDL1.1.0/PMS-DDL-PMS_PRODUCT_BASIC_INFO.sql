@@ -1,10 +1,9 @@
---ÅÐ¶Ï±íÊÇ·ñ´æÔÚ£¬Èç¹û´æÔÚÔòÉ¾³ý
+--ï¿½Ð¶Ï±ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½
 declare 
 	num number; 
 begin 
 	select count(1) into num from all_tables where TABLE_NAME = 'PMS_PRODUCT_BASIC_INFO'; 
 	if   num>0   then 
-		execute immediate 'alter table PMS_PRODUCT_BASIC_INFO drop constraint PK_ID_PRODUCT_BASIC_INFO cascade';
 	    execute immediate 'drop table PMS_PRODUCT_BASIC_INFO cascade constraints';
 	end if; 
 end;
@@ -38,33 +37,33 @@ create table PMS_PRODUCT_BASIC_INFO
   date_updated timestamp not null
 ) monitoring;
 -- Add comments to the table 
-comment on table PMS_PRODUCT_BASIC_INFO is '²úÆ·»ù´¡ÐÅÏ¢±í';
+comment on table PMS_PRODUCT_BASIC_INFO is 'ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½';
 -- Add comments to the columns 
-comment on column PMS_PRODUCT_BASIC_INFO.id_product_basic_info is 'Ö÷¼ü';
-comment on column PMS_PRODUCT_BASIC_INFO.product_no is '²úÆ·±àºÅ';
-comment on column PMS_PRODUCT_BASIC_INFO.version_no is '°æ±¾ºÅ';
-comment on column PMS_PRODUCT_BASIC_INFO.fund_source is '×Ê½ðÀ´Ô´code:FundSource';
-comment on column PMS_PRODUCT_BASIC_INFO.guarantee_type is 'µ£±£·þÎñÀàÐÍcode:GuaranteeType';
-comment on column PMS_PRODUCT_BASIC_INFO.credit_type is 'ÊÚÐÅÀàÐÍcode:CreditType';
-comment on column PMS_PRODUCT_BASIC_INFO.min_amt is '²úÆ·×îµÍ¶î¶È';
-comment on column PMS_PRODUCT_BASIC_INFO.max_amt is '²úÆ·×î¸ß¶î¶È';
-comment on column PMS_PRODUCT_BASIC_INFO.loan_term_list is '´û¿îÖÜÆÚcode:LoanTerm';
-comment on column PMS_PRODUCT_BASIC_INFO.loan_term_unit is '´û¿îÖÜÆÚµ¥Î»code:LoanTermUnit';
-comment on column PMS_PRODUCT_BASIC_INFO.int_standard_date is 'ÆðÏ¢»ù×¼ÈÕÆÚcode:IntStandardDate';
-comment on column PMS_PRODUCT_BASIC_INFO.extend_days is 'ÆðÏ¢ÈÕÑÓ³¤ÌìÊý';
-comment on column PMS_PRODUCT_BASIC_INFO.extend_day_type is 'ÑÓ³¤ÌìÊý¼ÆËã·½Ê½code:ExtendDayType';
-comment on column PMS_PRODUCT_BASIC_INFO.check_list_no is '¼ì²éÇåµã±àºÅ';
-comment on column PMS_PRODUCT_BASIC_INFO.repay_type is '»¹¿î·½Ê½code:RepayType';
-comment on column PMS_PRODUCT_BASIC_INFO.settlement_date_rule is '½áÏ¢ÈÕ¹æÔòcode:SettlementDateRule';
-comment on column PMS_PRODUCT_BASIC_INFO.first_term_rule is 'Ê×ÆÚ»¹¿îÔ¼¶¨';
-comment on column PMS_PRODUCT_BASIC_INFO.repay_base_date is '»¹¿îÈÕcode:RepayBaseDate';
-comment on column PMS_PRODUCT_BASIC_INFO.max_credit_period is '×î³¤ÊÚÐÅÆÚÏÞ';
-comment on column PMS_PRODUCT_BASIC_INFO.min_credit_amt is '×îµÍÊÚÐÅ¶î¶È';
-comment on column PMS_PRODUCT_BASIC_INFO.max_credit_amt is '×î¸ßÊÚÐÅ¶î¶È';
-comment on column PMS_PRODUCT_BASIC_INFO.created_by is '´´½¨ÈË';
-comment on column PMS_PRODUCT_BASIC_INFO.date_created is '´´½¨Ê±¼ä';
-comment on column PMS_PRODUCT_BASIC_INFO.updated_by is 'ÐÞ¸ÄÈË';
-comment on column PMS_PRODUCT_BASIC_INFO.date_updated is 'ÐÞ¸ÄÊ±¼ä';
+comment on column PMS_PRODUCT_BASIC_INFO.id_product_basic_info is 'ï¿½ï¿½ï¿½ï¿½';
+comment on column PMS_PRODUCT_BASIC_INFO.product_no is 'ï¿½ï¿½Æ·ï¿½ï¿½ï¿½';
+comment on column PMS_PRODUCT_BASIC_INFO.version_no is 'ï¿½æ±¾ï¿½ï¿½';
+comment on column PMS_PRODUCT_BASIC_INFO.fund_source is 'ï¿½Ê½ï¿½ï¿½ï¿½Ô´code:FundSource';
+comment on column PMS_PRODUCT_BASIC_INFO.guarantee_type is 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½code:GuaranteeType';
+comment on column PMS_PRODUCT_BASIC_INFO.credit_type is 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½code:CreditType';
+comment on column PMS_PRODUCT_BASIC_INFO.min_amt is 'ï¿½ï¿½Æ·ï¿½ï¿½Í¶ï¿½ï¿½';
+comment on column PMS_PRODUCT_BASIC_INFO.max_amt is 'ï¿½ï¿½Æ·ï¿½ï¿½ß¶ï¿½ï¿½';
+comment on column PMS_PRODUCT_BASIC_INFO.loan_term_list is 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½code:LoanTerm';
+comment on column PMS_PRODUCT_BASIC_INFO.loan_term_unit is 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½Î»code:LoanTermUnit';
+comment on column PMS_PRODUCT_BASIC_INFO.int_standard_date is 'ï¿½ï¿½Ï¢ï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½code:IntStandardDate';
+comment on column PMS_PRODUCT_BASIC_INFO.extend_days is 'ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ó³ï¿½ï¿½ï¿½ï¿½ï¿½';
+comment on column PMS_PRODUCT_BASIC_INFO.extend_day_type is 'ï¿½Ó³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã·½Ê½code:ExtendDayType';
+comment on column PMS_PRODUCT_BASIC_INFO.check_list_no is 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+comment on column PMS_PRODUCT_BASIC_INFO.repay_type is 'ï¿½ï¿½ï¿½î·½Ê½code:RepayType';
+comment on column PMS_PRODUCT_BASIC_INFO.settlement_date_rule is 'ï¿½ï¿½Ï¢ï¿½Õ¹ï¿½ï¿½ï¿½code:SettlementDateRule';
+comment on column PMS_PRODUCT_BASIC_INFO.first_term_rule is 'ï¿½ï¿½ï¿½Ú»ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½';
+comment on column PMS_PRODUCT_BASIC_INFO.repay_base_date is 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½code:RepayBaseDate';
+comment on column PMS_PRODUCT_BASIC_INFO.max_credit_period is 'ï¿½î³¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+comment on column PMS_PRODUCT_BASIC_INFO.min_credit_amt is 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¶ï¿½ï¿½';
+comment on column PMS_PRODUCT_BASIC_INFO.max_credit_amt is 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¶ï¿½ï¿½';
+comment on column PMS_PRODUCT_BASIC_INFO.created_by is 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+comment on column PMS_PRODUCT_BASIC_INFO.date_created is 'ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½';
+comment on column PMS_PRODUCT_BASIC_INFO.updated_by is 'ï¿½Þ¸ï¿½ï¿½ï¿½';
+comment on column PMS_PRODUCT_BASIC_INFO.date_updated is 'ï¿½Þ¸ï¿½Ê±ï¿½ï¿½';
 -- Create/Recreate primary, unique and foreign key constraints
 create unique index IDX_ID_PRODUCT_BASIC_INFO ON PMS_PRODUCT_BASIC_INFO(id_product_basic_info);
 alter table PMS_PRODUCT_BASIC_INFO add constraint PK_ID_PRODUCT_BASIC_INFO primary key (id_product_basic_info) using index IDX_ID_PRODUCT_BASIC_INFO;

@@ -4,7 +4,6 @@ declare
 begin 
 	select count(1) into num from all_tables where TABLE_NAME = 'PMS_DATA_DICTIONARY'; 
 	if   num>0   then 
-		execute immediate 'alter table PMS_DATA_DICTIONARY drop constraint PK_ID_DATA_DICTIONARY cascade';
 	    execute immediate 'drop table PMS_DATA_DICTIONARY cascade constraints';
 	end if;
 end;

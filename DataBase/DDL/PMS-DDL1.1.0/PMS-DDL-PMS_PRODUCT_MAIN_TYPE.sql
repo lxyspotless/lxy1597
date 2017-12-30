@@ -1,10 +1,9 @@
---ÅÐ¶Ï±íÊÇ·ñ´æÔÚ£¬Èç¹û´æÔÚÔòÉ¾³ý
+--ï¿½Ð¶Ï±ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½
 declare 
 	num number; 
 begin 
 	select count(1) into num from all_tables where TABLE_NAME = 'PMS_PRODUCT_MAIN_TYPE'; 
 	if   num>0   then 
-		execute immediate 'alter table PMS_PRODUCT_MAIN_TYPE drop constraint PK_ID_PRODUCT_MAIN_TYPE cascade';
 	    execute immediate 'drop table PMS_PRODUCT_MAIN_TYPE cascade constraints';
 	end if; 
 end;
@@ -26,21 +25,21 @@ create table PMS_PRODUCT_MAIN_TYPE
   date_updated timestamp not null
 ) monitoring;
 -- Add comments to the table 
-comment on table PMS_PRODUCT_MAIN_TYPE is '²úÆ·Ö÷Ìå±í';
+comment on table PMS_PRODUCT_MAIN_TYPE is 'ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½';
 -- Add comments to the columns 
-comment on column PMS_PRODUCT_MAIN_TYPE.id_product_main_type is 'Ö÷¼ü';
-comment on column PMS_PRODUCT_MAIN_TYPE.business_owner is 'ÒµÎñ¹«Ë¾';
-comment on column PMS_PRODUCT_MAIN_TYPE.business_line is 'ÒµÎñÌõÏß';
-comment on column PMS_PRODUCT_MAIN_TYPE.product_type is '²úÆ·ÀàÐÍ';
-comment on column PMS_PRODUCT_MAIN_TYPE.product_no is '²úÆ·±àºÅ';
-comment on column PMS_PRODUCT_MAIN_TYPE.product_name is '²úÆ·Ãû³Æ';
-comment on column PMS_PRODUCT_MAIN_TYPE.parent_product_no is 'ÉÏ¼¶²úÆ·±àÂë';
-comment on column PMS_PRODUCT_MAIN_TYPE.dept_code is '²¿ÃÅ±àÂë';
-comment on column PMS_PRODUCT_MAIN_TYPE.remark is '±¸×¢';
-comment on column PMS_PRODUCT_MAIN_TYPE.created_by is '´´½¨ÈË';
-comment on column PMS_PRODUCT_MAIN_TYPE.date_created is '´´½¨Ê±¼ä';
-comment on column PMS_PRODUCT_MAIN_TYPE.updated_by is 'ÐÞ¸ÄÈË';
-comment on column PMS_PRODUCT_MAIN_TYPE.date_updated is 'ÐÞ¸ÄÊ±¼ä';
+comment on column PMS_PRODUCT_MAIN_TYPE.id_product_main_type is 'ï¿½ï¿½ï¿½ï¿½';
+comment on column PMS_PRODUCT_MAIN_TYPE.business_owner is 'Òµï¿½ï¿½Ë¾';
+comment on column PMS_PRODUCT_MAIN_TYPE.business_line is 'Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+comment on column PMS_PRODUCT_MAIN_TYPE.product_type is 'ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½';
+comment on column PMS_PRODUCT_MAIN_TYPE.product_no is 'ï¿½ï¿½Æ·ï¿½ï¿½ï¿½';
+comment on column PMS_PRODUCT_MAIN_TYPE.product_name is 'ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½';
+comment on column PMS_PRODUCT_MAIN_TYPE.parent_product_no is 'ï¿½Ï¼ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½';
+comment on column PMS_PRODUCT_MAIN_TYPE.dept_code is 'ï¿½ï¿½ï¿½Å±ï¿½ï¿½ï¿½';
+comment on column PMS_PRODUCT_MAIN_TYPE.remark is 'ï¿½ï¿½×¢';
+comment on column PMS_PRODUCT_MAIN_TYPE.created_by is 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+comment on column PMS_PRODUCT_MAIN_TYPE.date_created is 'ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½';
+comment on column PMS_PRODUCT_MAIN_TYPE.updated_by is 'ï¿½Þ¸ï¿½ï¿½ï¿½';
+comment on column PMS_PRODUCT_MAIN_TYPE.date_updated is 'ï¿½Þ¸ï¿½Ê±ï¿½ï¿½';
 -- Create/Recreate primary, unique and foreign key constraints
 create unique index IDX_ID_PRODUCT_MAIN_TYPE ON PMS_PRODUCT_MAIN_TYPE(id_product_main_type);
 alter table PMS_PRODUCT_MAIN_TYPE add constraint PK_ID_PRODUCT_MAIN_TYPE primary key (id_product_main_type) using index IDX_ID_PRODUCT_MAIN_TYPE;

@@ -1,10 +1,9 @@
---ÅÐ¶Ï±íÊÇ·ñ´æÔÚ£¬Èç¹û´æÔÚÔòÉ¾³ý
+--ï¿½Ð¶Ï±ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½
 declare 
 	num number; 
 begin 
 	select count(1) into num from all_tables where TABLE_NAME = 'PMS_PRODUCT_MANAGEMENT'; 
 	if   num>0   then 
-		execute immediate 'alter table PMS_PRODUCT_MANAGEMENT drop constraint PK_ID_PRODUCT_MANAGEMENT cascade';
 	    execute immediate 'drop table PMS_PRODUCT_MANAGEMENT cascade constraints';
 	end if; 
 end;
@@ -26,21 +25,21 @@ create table PMS_PRODUCT_MANAGEMENT
   date_updated timestamp not null
 ) monitoring;
 -- Add comments to the table 
-comment on table PMS_PRODUCT_MANAGEMENT is '²úÆ·¿ØÖÆ±í';
+comment on table PMS_PRODUCT_MANAGEMENT is 'ï¿½ï¿½Æ·ï¿½ï¿½ï¿½Æ±ï¿½';
 -- Add comments to the columns 
-comment on column PMS_PRODUCT_MANAGEMENT.id_product_management is 'Ö÷¼ü';
-comment on column PMS_PRODUCT_MANAGEMENT.product_no is '²úÆ·±àºÅ';
-comment on column PMS_PRODUCT_MANAGEMENT.version_no is '°æ±¾ºÅ';
-comment on column PMS_PRODUCT_MANAGEMENT.effective_date is 'ÉúÐ§ÈÕÆÚ';
-comment on column PMS_PRODUCT_MANAGEMENT.publish_date is '·¢²¼Ê±¼ä';
-comment on column PMS_PRODUCT_MANAGEMENT.approved_by is 'ÉóÅúÈË';
-comment on column PMS_PRODUCT_MANAGEMENT.approve_date is 'ÉóÅúÊ±¼ä';
-comment on column PMS_PRODUCT_MANAGEMENT.approve_comment is 'ÉóÅúÒâ¼û';
+comment on column PMS_PRODUCT_MANAGEMENT.id_product_management is 'ï¿½ï¿½ï¿½ï¿½';
+comment on column PMS_PRODUCT_MANAGEMENT.product_no is 'ï¿½ï¿½Æ·ï¿½ï¿½ï¿½';
+comment on column PMS_PRODUCT_MANAGEMENT.version_no is 'ï¿½æ±¾ï¿½ï¿½';
+comment on column PMS_PRODUCT_MANAGEMENT.effective_date is 'ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½';
+comment on column PMS_PRODUCT_MANAGEMENT.publish_date is 'ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½';
+comment on column PMS_PRODUCT_MANAGEMENT.approved_by is 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+comment on column PMS_PRODUCT_MANAGEMENT.approve_date is 'ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½';
+comment on column PMS_PRODUCT_MANAGEMENT.approve_comment is 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
 comment on column PMS_PRODUCT_MANAGEMENT.status is '×´Ì¬ code:ApproveStatus';
-comment on column PMS_PRODUCT_MANAGEMENT.created_by is '´´½¨ÈË';
-comment on column PMS_PRODUCT_MANAGEMENT.date_created is '´´½¨Ê±¼ä';
-comment on column PMS_PRODUCT_MANAGEMENT.updated_by is 'ÐÞ¸ÄÈË';
-comment on column PMS_PRODUCT_MANAGEMENT.date_updated is 'ÐÞ¸ÄÊ±¼ä';
+comment on column PMS_PRODUCT_MANAGEMENT.created_by is 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+comment on column PMS_PRODUCT_MANAGEMENT.date_created is 'ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½';
+comment on column PMS_PRODUCT_MANAGEMENT.updated_by is 'ï¿½Þ¸ï¿½ï¿½ï¿½';
+comment on column PMS_PRODUCT_MANAGEMENT.date_updated is 'ï¿½Þ¸ï¿½Ê±ï¿½ï¿½';
 -- Create/Recreate primary, unique and foreign key constraints
 create unique index IDX_ID_PRODUCT_MANAGEMENT ON PMS_PRODUCT_MANAGEMENT(id_product_management);
 alter table PMS_PRODUCT_MANAGEMENT add constraint PK_ID_PRODUCT_MANAGEMENT primary key (id_product_management) using index IDX_ID_PRODUCT_MANAGEMENT;
