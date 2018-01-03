@@ -52,6 +52,7 @@ public class RedisServiceImpl implements RedisService {
 	
 	private static Logger logger = Logger.getLogger(RedisServiceImpl.class);
 	
+	//--------------------------------------StringRedisTemplate-------------------------------------------
 	@Override
 	public void setString(String key, String value) {
 		ValueOperations<String, String> valueOperations = stringRedisTemplate.opsForValue();
@@ -112,6 +113,15 @@ public class RedisServiceImpl implements RedisService {
 		redisTemplate.delete(key);
 	}
 
+	//--------------------------------------JedisPool-------------------------------------------
+	@Override
+	public JedisPool getJedisPool() {
+		if(null == jedisPool){
+			jedisPool = new JedisPool(jedisPoolConfig, host, Integer.parseInt(port), Integer.parseInt(timeout), password);
+		}
+		return jedisPool;
+	}
+
 	@Override
 	public Boolean setStringToRedis(String key, String value) {
 		Jedis jedis = null;
@@ -125,6 +135,8 @@ public class RedisServiceImpl implements RedisService {
 				// 返回OK则成功
 				resultFlag = true;
 				logger.info("jedisPool存值成功:"+key+","+value);
+			} else {
+				logger.info("jedisPool存值失败:"+key+","+value);
 			}
 		} catch (Exception e) {
 			logger.error("jedisPool存值失败:"+key+","+value);
@@ -148,6 +160,8 @@ public class RedisServiceImpl implements RedisService {
 			if(null != resultString){
 				// 成功
 				logger.info("jedisPool取值成功:"+key+","+resultString);
+			} else {
+				logger.info("jedisPool取值失败:"+key+","+resultString);
 			}
 		} catch (Exception e) {
 			logger.error("jedisPool取值失败:"+key, e);
@@ -172,6 +186,8 @@ public class RedisServiceImpl implements RedisService {
 				// 返回OK则成功
 				resultFlag = true;
 				logger.info("jedisPool存值成功:"+key+","+value);
+			} else {
+				logger.info("jedisPool存值失败:"+key+","+value);
 			}
 		} catch (Exception e) {
 			logger.error("jedisPool存值失败:"+key+","+value);
@@ -196,6 +212,8 @@ public class RedisServiceImpl implements RedisService {
 			if(null != resultObject){
 				// 成功
 				logger.info("jedisPool取值成功:"+key+","+resultObject);
+			} else {
+				logger.info("jedisPool取值失败:"+key+","+resultObject);
 			}
 		} catch (Exception e) {
 			logger.error("jedisPool取值失败:"+key, e);
@@ -208,11 +226,72 @@ public class RedisServiceImpl implements RedisService {
 	}
 
 	@Override
-	public JedisPool getJedisPool() {
-		if(null == jedisPool){
-			jedisPool = new JedisPool(jedisPoolConfig, host, Integer.parseInt(port), Integer.parseInt(timeout), password);
+	public boolean isExist(String key) {
+		Jedis jedis = null;
+		// 默认不存在
+		boolean resultFlag = false;
+		try {
+			JedisPool jedisPool = getJedisPool();
+			jedis = jedisPool.getResource();
+			resultFlag = jedis.exists(key);
+			if(resultFlag){
+				// 成功
+				logger.info("jedisPool存在该值:"+key);
+			} else {
+				logger.info("jedisPool不存在该值:"+key);
+			}
+		} catch (Exception e) {
+			logger.error("jedisPool取值失败:"+key, e);
+		} finally {
+			if(null != jedis){
+				jedis.close();
+			}
 		}
-		return jedisPool;
+		return resultFlag;
+	}
+
+	@Override
+	public void deleteKeyFromRedis(String key) {
+		Jedis jedis = null;
+		try {
+			JedisPool jedisPool = getJedisPool();
+			jedis = jedisPool.getResource();
+			long resultFlag = jedis.del(key);
+			if(1 == resultFlag){
+				// 成功
+				logger.info("jedisPool删除该值成功:"+key);
+			} else {
+				logger.info("jedisPool删除该值失败:"+key);
+			}
+		} catch (Exception e) {
+			logger.error("jedisPool取值失败:"+key, e);
+		} finally {
+			if(null != jedis){
+				jedis.close();
+			}
+		}
+	}
+
+	@Override
+	public void setRedisKeyDie(String key, int seconds) {
+		Jedis jedis = null;
+		try {
+			JedisPool jedisPool = getJedisPool();
+			jedis = jedisPool.getResource();
+			long resultFlag = jedis.expire(key, seconds);
+			if(1 == resultFlag){
+				// 成功
+				logger.info("jedisPool删除该值成功:"+key);
+			} else {
+				logger.info("jedisPool删除该值失败:"+key);
+			}
+		} catch (Exception e) {
+			logger.error("jedisPool取值失败:"+key, e);
+		} finally {
+			if(null != jedis){
+				jedis.close();
+			}
+		}
 	}
 
 }

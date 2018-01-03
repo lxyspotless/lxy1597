@@ -10,6 +10,7 @@ public interface RedisService {
 	
 	public String SERVICE_ID = "pms.common.redisService";
 	
+	//--------------------------------------StringRedisTemplate-------------------------------------------
 	/**
 	 * 存入String-String
 	 * @param key
@@ -85,6 +86,13 @@ public interface RedisService {
      * @param key
      */
     public void delete(String key);
+
+    //--------------------------------------JedisPool-------------------------------------------
+    /**
+     * 获取Jedis连接池，线程安全
+     * @return JedisPool
+     */
+    public JedisPool getJedisPool();
     
     /**
      * jedisPool存值String-String，线程安全
@@ -115,11 +123,24 @@ public interface RedisService {
      * @return
      */
     public Object getObjectFromRedis(String key);
-
+    
     /**
-     * 获取Jedis连接池
-     * @return JedisPool
+     * 是否存在key(jedis)，线程安全
+     * @param key
+     * @return
      */
-    public JedisPool getJedisPool();
+    public boolean isExist(String key);
+    
+    /**
+     * 删除key(jedis)，线程安全
+     * @param key
+     */
+    public void deleteKeyFromRedis(String key);
+    
+    /**
+     * 设置key失效时间(jedis)，线程安全
+     * @param key
+     */
+    public void setRedisKeyDie(String key, int seconds);
     
 }
