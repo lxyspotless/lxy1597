@@ -109,10 +109,15 @@
   <filter>
   	<filter-name>sessionTimeOutFilter</filter-name>
   	<filter-class>com.loan.pms.system.web.filter.SessionTimeOutFilter</filter-class>
+  	<!-- 登录超时开关,开:1，关:0 -->
+  	<init-param>
+  		<param-name>loginTimeOutSwitch</param-name>
+  		<param-value>1</param-value>
+  	</init-param>
   	<!-- 登录超时时间-分钟 -->
   	<init-param>
   		<param-name>loginTimeOutMin</param-name>
-  		<param-value>10</param-value>
+  		<param-value>15</param-value>
   	</init-param>
   </filter>
   <!-- 拦截所有请求 -->
