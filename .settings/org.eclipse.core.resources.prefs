@@ -11,6 +11,4 @@ encoding//DataBase/DML/PMS-DML1.1.0/PMS-DML-PMS_PRODUCT_MANAGEMENT.sql=GBK
 encoding//DataBase/DML/PMS-DML1.1.0/PMS-DML-PMS_RIGHT_INFO.sql=GBK
 encoding//DataBase/DML/PMS-DML1.1.0/PMS-DML-PMS_UM_INFO.sql=GBK
 encoding//DataBase/PKG/PMS-PKG-PROC_QUARTZ_LOCK_JOB.sql=GBK
-encoding//WebContent/WEB-INF/config/jdbc.properties=UTF-8
-encoding//WebContent/WEB-INF/config/log4j.properties=UTF-8
 encoding//src/com/loan/pms/system/web/controller/SystemController.java=UTF-8

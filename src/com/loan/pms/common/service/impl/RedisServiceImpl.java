@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import com.loan.pms.common.service.RedisService;
 import com.loan.pms.common.util.CommonFinal;
 import com.loan.pms.common.util.CommonUtil;
+import com.loan.pms.product.service.impl.ProductServiceImpl;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -281,12 +282,12 @@ public class RedisServiceImpl implements RedisService {
 			long resultFlag = jedis.expire(key, seconds);
 			if(1 == resultFlag){
 				// 成功
-				logger.info("jedisPool删除该值成功:"+key);
+				logger.info("jedisPool设置该值失效时间成功:"+key);
 			} else {
-				logger.info("jedisPool删除该值失败:"+key);
+				logger.info("jedisPool设置该值失效时间失败:"+key);
 			}
 		} catch (Exception e) {
-			logger.error("jedisPool取值失败:"+key, e);
+			logger.error("jedisPool设置该值失效时间失败:"+key, e);
 		} finally {
 			if(null != jedis){
 				jedis.close();
