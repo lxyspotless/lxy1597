@@ -15,7 +15,7 @@
 	<context:component-scan base-package="com.loan.pms.**.web"/>
 	
 	<!-- json转换器 -->
-	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
 	    <property name="supportedMediaTypes">
 	        <list>
 	            <value>text/html;charset=UTF-8</value>
@@ -44,7 +44,7 @@
 	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
 		<property name="definitions">
 			<list>
-				<value>/WEB-INF/config/tiles-defs.xml</value>
+				<value>classpath:config/tiles-defs.xml</value>
 			</list>
 		</property>
 	</bean>
