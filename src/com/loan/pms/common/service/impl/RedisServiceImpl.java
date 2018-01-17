@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import com.loan.pms.common.service.RedisService;
 import com.loan.pms.common.util.CommonFinal;
 import com.loan.pms.common.util.CommonUtil;
-import com.loan.pms.product.service.impl.ProductServiceImpl;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
