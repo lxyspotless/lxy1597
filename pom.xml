@@ -86,19 +86,6 @@
     		<artifactId>log4j</artifactId>
     		<version>1.2.17</version>
 		</dependency>
-	    <!-- junit -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>${org.springframework.version}</version>
-			<scope>test</scope>
-		</dependency>
 		<!-- slf4j -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -116,13 +103,6 @@
 			<version>${slf4j.version}</version>
 		</dependency>
 		
-		<!-- JSP 库 -->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>${javax.servlet.version}</version>
-			<scope>provided</scope>
-		</dependency>
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -201,6 +181,13 @@
 			<artifactId>jstl</artifactId>
 			<version>${jstl.version}</version>
 		</dependency>
+		<!-- JSP 库 -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>${javax.servlet.version}</version>
+			<scope>provided</scope>
+		</dependency>
 	    <!-- ojdbc7 -->  
 		<dependency>
     		<groupId>commons-dbcp</groupId>
@@ -244,6 +231,19 @@
 		    <groupId>com.alibaba</groupId>
 		    <artifactId>fastjson</artifactId>
 		    <version>1.2.11</version>
+		</dependency>
+	    <!-- junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${org.springframework.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<!-- quartz -->
 		<dependency>

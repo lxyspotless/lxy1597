@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
-	"http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+"http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
 <!-- 定义系统中要显示的各种页面，可以在web-context.xml中引用，或者在Controller中引用 -->
 <tiles-definitions>
 	<!-- 主布局 -->
