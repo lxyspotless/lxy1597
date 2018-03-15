@@ -1,4 +1,4 @@
-package com.loan.pms.test.base;
+package com.loan.pms.test.baserunner;
 
 import org.junit.runner.RunWith;
 import org.springframework.test.annotation.Rollback;

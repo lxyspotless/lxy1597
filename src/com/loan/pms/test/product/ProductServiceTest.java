@@ -1,4 +1,4 @@
-package com.loan.pms.test;
+package com.loan.pms.test.product;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.loan.pms.product.dao.ProductDao;
 import com.loan.pms.product.dto.ProductInfoDTO;
-import com.loan.pms.test.base.BaseSpringJunit4RunnerTest;
+import com.loan.pms.test.baserunner.BaseSpringJunit4RunnerTest;
 
 public class ProductServiceTest extends BaseSpringJunit4RunnerTest {
 

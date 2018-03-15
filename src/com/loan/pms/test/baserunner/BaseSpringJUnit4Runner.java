@@ -1,4 +1,4 @@
-package com.loan.pms.test.base;
+package com.loan.pms.test.baserunner;
 
 import java.io.FileNotFoundException;
 
