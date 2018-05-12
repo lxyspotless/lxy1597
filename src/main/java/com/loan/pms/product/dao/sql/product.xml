@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.loan.pms.product.dao.ProductDao">
+    <select id="querySaleProductInfoList" parameterType="com.loan.pms.product.dto.QuerySaleProductDTO" 
+    			resultType="com.loan.pms.product.dto.ProductInfoDTO">
+        select ppmt.id_product_main_type as "id",
+	       	ppmt.business_owner          as "businessOwner",
+	       	ppmt.business_line           as "businessLine",
+	       	ppmt.product_type            as "productType",
+	       	ppmt.product_no              as "productNo",
+	       	ppmt.product_name            as "productName",
+	       	ppmt.parent_product_no       as "parentProductNo",
+	       	ppmt.dept_code               as "deptCode",
+	       	ppmt.remark                  as "remark",
+	       	ppmt.created_by              as "createdBy",
+	       	ppmt.date_created            as "dateCreated",
+	       	ppmt.updated_by              as "updatedBy",
+	       	ppmt.date_updated            as "dateUpdated"
+	  	from pms_product_main_type ppmt
+	  	where ppmt.product_type = 'MAIN'
+		  	<if test="businessLine != null and businessLine != ''">
+	        	and ppmt.business_line = #{businessLine}
+	    	</if> 
+		  	<if test="productName != null and productName != ''">
+	        	and ppmt.product_name like '%'||#{productName}||'%'
+	    	</if> 
+  		order by ppmt.product_no 
+  		limit #{minRow},#{maxRow}
+    </select>
+    
+    <select id="queryAllSaleProductList" resultType="com.loan.pms.product.dto.ProductInfoDTO">
+    	select ppmt.id_product_main_type as "id",
+		       ppmt.business_owner          as "businessOwner",
+		       ppmt.business_line           as "businessLine",
+		       ppmt.product_type            as "productType",
+		       ppmt.product_no              as "productNo",
+		       ppmt.product_name            as "productName",
+		       ppmt.parent_product_no       as "parentProductNo",
+		       ppmt.dept_code               as "deptCode",
+		       ppmt.remark                  as "remark",
+		       ppmt.created_by              as "createdBy",
+		       ppmt.date_created            as "dateCreated",
+		       ppmt.updated_by              as "updatedBy",
+		       ppmt.date_updated            as "dateUpdated"
+		  	from pms_product_main_type ppmt
+		  	where ppmt.product_type = 'MAIN'
+    </select>
+    
+    <select id="querySubProductInfoList" parameterType="com.loan.pms.product.dto.QuerySubProductDTO" 
+    			resultType="com.loan.pms.product.dto.SubProductInfoDTO">
+        select ppmt.parent_product_no	as "parentProductNo",
+		    (select in_ppmt.product_name
+		         from pms_product_main_type in_ppmt
+		         where in_ppmt.product_no = ppmt.parent_product_no) as "parentProductName",
+		     ppm.product_no			as "productNo",
+		     ppm.version_no			as "versionNo",
+		     ppmt.product_name		as "productName",
+		     ppm.effective_date		as "effectiveDate",
+		     ppm.status				as "status",
+		     ppm.created_by			as "createdBy",
+		     ppm.date_created			as "dateCreated",
+		     ppm.updated_by			as "updatedBy",
+		     ppm.date_updated			as "dateUpdated"
+		from pms_product_management ppm, pms_product_main_type ppmt
+		where ppm.product_no = ppmt.product_no
+		  	 and ppmt.product_type = 'SUB'
+		  	<if test="businessLine != null and businessLine != ''">
+	        	and ppmt.business_line = #{businessLine}
+	    	</if> 
+		  	<if test="saleProductNo != null and saleProductNo != ''">
+	        	and ppmt.parent_product_no = #{saleProductNo}
+	    	</if> 
+		  	<if test="productNo != null and productNo != ''">
+	        	and ppmt.productNo like '%'||#{productNo}||'%'
+	    	</if> 
+		  	<if test="productName != null and productName != ''">
+	        	and ppmt.product_name like '%'||#{productName}||'%'
+	    	</if> 
+		  	<if test="status != null and status != ''">
+	        	and ppm.status = #{status}
+	    	</if> 
+	    	<![CDATA[
+		  	and str_to_date(ppm.effective_date,'%Y-%m-%dd')<=sysdate()
+		  	and not exists (select 1 from pms_product_management in_ppm
+		  		where ppm.product_no = in_ppm.product_no
+		  		and in_ppm.status = 'PUBLISHED'
+		  		and str_to_date(in_ppm.effective_date,'%Y-%m-%dd')<=sysdate()
+		  		and ppm.effective_date <= in_ppm.effective_date
+		  		and ppm.version_no < in_ppm.version_no
+		  		)
+		  	]]>
+  		order by ppmt.product_no
+  		limit #{minRow},#{maxRow}
+    </select>
+    
+</mapper>

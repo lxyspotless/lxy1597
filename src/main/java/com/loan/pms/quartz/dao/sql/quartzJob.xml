@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.loan.pms.quartz.dao.QuartzJobDao">
+    <select id="lockJob" statementType="CALLABLE" parameterType="com.loan.pms.quartz.dto.QuartzJobLockDTO" >
+       	<![CDATA[
+       		{call PROC_QUARTZ_LOCK_JOB(#{targetId,mode=IN,jdbcType=VARCHAR},#{targetType,mode=IN,jdbcType=VARCHAR},
+       			#{lockedDate,mode=IN,jdbcType=TIMESTAMP},#{expiredDate,mode=IN,jdbcType=TIMESTAMP},
+       			#{isLocked,mode=OUT,jdbcType=VARCHAR,javaType=java.lang.String})}
+       	]]>
+    </select>
+    
+    <update id="expireJob" parameterType="com.loan.pms.quartz.dto.QuartzJobLockDTO">
+    	update pms_quartz_job_lock
+		set locked_date = #{lockedDate},expired_date = #{expiredDate}
+		where target_id = #{targetId} and target_type = #{targetType}
+    </update>
+</mapper>

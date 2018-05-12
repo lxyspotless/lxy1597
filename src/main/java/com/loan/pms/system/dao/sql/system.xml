@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.loan.pms.system.dao.SystemDao">
+    <select id="loginSystem" parameterType="java.util.Map" resultType="java.lang.String">
+        select user_name
+        from pms_um_info
+        where um_id = #{umId,jdbcType=VARCHAR} and
+        	pass_word = #{passWord,jdbcType=VARCHAR} and
+        	status = 'Y'
+    </select>
+    
+    <select id="queryUserName" parameterType="java.lang.String" resultType="java.lang.String">
+        select user_name
+        from pms_um_info
+        where um_id = #{umId,jdbcType=VARCHAR} and
+        	status = 'Y'
+    </select>
+    
+    <select id="querySystemMenuList" resultType="com.loan.pms.system.dto.SystemMenuDTO">
+        select right_code   as "menuCode",
+        	right_name   as "menuName",
+       		parent_code  as "parentCode",
+       		right_action as "menuAction"
+  		from pms_right_info pri
+ 		where pri.right_type = 'MENU'
+   			and pri.status = 'Y'
+ 			order by pri.right_code
+    </select>
+</mapper>
