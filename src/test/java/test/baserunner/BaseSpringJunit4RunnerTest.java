@@ -1,5 +1,6 @@
 package test.baserunner;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
@@ -18,4 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 public class BaseSpringJunit4RunnerTest {
 
+	@Test
+	public void testTemp(){
+		System.out.println("test");
+	}
 }
