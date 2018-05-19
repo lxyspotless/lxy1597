@@ -1,2 +1,2 @@
 # NEO-LOAN-PMS
-Neo developed loan peoduct manage system
+Loan Product Manage System,developed by Neo,the one of matrix
