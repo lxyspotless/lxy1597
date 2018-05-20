@@ -30,7 +30,7 @@ public class ProductServiceImpl implements ProductService {
 	private ProductDao productDao;
 	
 	@Resource(name = RedisService.SERVICE_ID)
-	public RedisService redisService;
+	private RedisService redisService;
 	
 	private static Logger logger = Logger.getLogger(ProductServiceImpl.class);
 
