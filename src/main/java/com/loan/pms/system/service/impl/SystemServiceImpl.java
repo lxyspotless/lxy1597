@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.loan.pms.common.util.ListUtils;
+import com.loan.pms.common.util.ListUtil;
 import com.loan.pms.system.dao.SystemDao;
 import com.loan.pms.system.dto.SystemMenuDTO;
 import com.loan.pms.system.service.SystemService;
@@ -46,7 +46,7 @@ public class SystemServiceImpl implements SystemService {
 		// 查询菜单列表
 		List<SystemMenuDTO> menuList = systemDao.querySystemMenuList();
 		List<SystemMenuDTO> resultMenuList = new ArrayList<SystemMenuDTO>();
-		if(!ListUtils.isEmpty(menuList)) {
+		if(!ListUtil.isEmpty(menuList)) {
 			List<SystemMenuDTO> childMenuList = new ArrayList<SystemMenuDTO>();
 			for(int i = 0 ; i < menuList.size() ; i++) {
 				// 主菜单,先保存将子菜单加入到childMenu中

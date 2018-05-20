@@ -1,18 +1,10 @@
 package com.loan.pms.common.service.impl;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.SetOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 import com.loan.pms.common.service.RedisService;
@@ -24,15 +16,16 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 @Service(RedisService.SERVICE_ID)
-@SuppressWarnings({ "unchecked", "rawtypes" })
 public class RedisServiceImpl implements RedisService {
 	
 	@Autowired
 	private JedisPoolConfig jedisPoolConfig;
 	
+	@SuppressWarnings({ "unused", "rawtypes" })
 	@Autowired
 	private RedisTemplate redisTemplate;  
 	
+	@SuppressWarnings("unused")
 	@Autowired
 	private StringRedisTemplate stringRedisTemplate;
 	
@@ -53,6 +46,7 @@ public class RedisServiceImpl implements RedisService {
 	private static Logger logger = Logger.getLogger(RedisServiceImpl.class);
 	
 	//--------------------------------------StringRedisTemplate-------------------------------------------
+	/*
 	@Override
 	public void setString(String key, String value) {
 		ValueOperations<String, String> valueOperations = stringRedisTemplate.opsForValue();
@@ -112,7 +106,7 @@ public class RedisServiceImpl implements RedisService {
 	public void delete(String key) {
 		redisTemplate.delete(key);
 	}
-
+	*/
 	//--------------------------------------JedisPool-------------------------------------------
 	@Override
 	public JedisPool getJedisPool() {

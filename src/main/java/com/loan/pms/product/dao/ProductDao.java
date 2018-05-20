@@ -6,6 +6,7 @@ import com.loan.pms.product.dto.ProductInfoDTO;
 import com.loan.pms.product.dto.QuerySaleProductDTO;
 import com.loan.pms.product.dto.QuerySubProductDTO;
 import com.loan.pms.product.dto.SubProductInfoDTO;
+import com.loan.pms.product.dto.SubProductRedisInfoDTO;
 
 public interface ProductDao {
 	
@@ -27,4 +28,10 @@ public interface ProductDao {
 	 * @return List<SubProductInfoDTO>
 	 */
 	public List<SubProductInfoDTO> querySubProductInfoList(QuerySubProductDTO querySubProductDTO);
+	
+	/**
+	 * 查询所有已发布的产品信息列表
+	 * @return List<SubProductRedisInfoDTO>
+	 */
+	public List<SubProductRedisInfoDTO> queryPublishedProductList();
 }

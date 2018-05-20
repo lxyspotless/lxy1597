@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.loan.pms.common.dao.CommonDao;
 import com.loan.pms.common.dto.DataDictionaryDTO;
 import com.loan.pms.common.service.CommonService;
-import com.loan.pms.common.util.ListUtils;
+import com.loan.pms.common.util.ListUtil;
 
 @Service(CommonService.SERVICE_ID)
 public class CommonServiceImpl implements CommonService {
@@ -39,7 +39,7 @@ public class CommonServiceImpl implements CommonService {
 	@Override
 	public void refreshDataDictionaryMemory() {
 		List<String> list = queryDictionaryCode();
-		if(!ListUtils.isEmpty(list)){
+		if(!ListUtil.isEmpty(list)){
 			for(String codeNo : list){
 				dataDictionaryMap.put(codeNo, commonDao.queryDictionaryCodeItem(codeNo));
 			}

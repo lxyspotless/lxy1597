@@ -1,6 +1,7 @@
 package com.loan.pms.product.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.loan.pms.product.dto.ProductInfoDTO;
 import com.loan.pms.product.dto.QuerySaleProductDTO;
@@ -31,4 +32,15 @@ public interface ProductService {
 	 * @return List<SubProductInfoDTO>
 	 */
 	public List<SubProductInfoDTO> querySubProductInfoList(QuerySubProductDTO querySubProductDto);
+	
+	/**
+	 * 查询所有已发布产品信息
+	 * @return List<SubProductInfoRedisDTO>
+	 */
+	public Map<String, ? extends Object> queryPublishedProductList();
+	
+	/**
+	 * 将已发布产品信息列表放入Redis
+	 */
+	public void putPublishedProductListToRedis();
 }
