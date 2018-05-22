@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.loan.pms.system.util.SystemFinal;
+import com.loan.pms.system.util.SystemConstant;
 
 public class RequestFilter extends OncePerRequestFilter {
 
@@ -19,11 +19,11 @@ public class RequestFilter extends OncePerRequestFilter {
 		String requestUrl = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String url = requestUrl.substring(contextPath.length());
-		String userName = (String) request.getSession().getAttribute(SystemFinal.LOGIN_USERNAME);
+		String userName = (String) request.getSession().getAttribute(SystemConstant.LOGIN_USERNAME);
 		// 未登陆&需拦截请求，重定向到登录界面
 		if(StringUtils.isEmpty(userName) && !isExcludedUrl(url)){
-			request.getSession().removeAttribute(SystemFinal.LOGIN_USERNAME);
-			request.getSession().removeAttribute(SystemFinal.LAST_ACTIVE_TIME);
+			request.getSession().removeAttribute(SystemConstant.LOGIN_USERNAME);
+			request.getSession().removeAttribute(SystemConstant.LAST_ACTIVE_TIME);
 			request.getSession().invalidate();
 			response.sendRedirect("login.jsp");
 			return;

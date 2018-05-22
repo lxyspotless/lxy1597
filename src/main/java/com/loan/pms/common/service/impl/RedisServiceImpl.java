@@ -8,7 +8,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.loan.pms.common.service.RedisService;
-import com.loan.pms.common.util.CommonFinal;
+import com.loan.pms.common.util.CommonConstant;
 import com.loan.pms.common.util.CommonUtil;
 
 import redis.clients.jedis.Jedis;
@@ -125,7 +125,7 @@ public class RedisServiceImpl implements RedisService {
 			JedisPool jedisPool = getJedisPool();
 			jedis = jedisPool.getResource();
 			String result = jedis.set(key, value);
-			if(CommonFinal.OK.equals(result)){
+			if(CommonConstant.OK.equals(result)){
 				// 返回OK则成功
 				resultFlag = true;
 				logger.info("jedisPool存值成功:"+key+","+value);
@@ -176,7 +176,7 @@ public class RedisServiceImpl implements RedisService {
 			JedisPool jedisPool = getJedisPool();
 			jedis = jedisPool.getResource();
 			String result = jedis.set(key.getBytes(), CommonUtil.serialize(value));
-			if(CommonFinal.OK.equals(result)){
+			if(CommonConstant.OK.equals(result)){
 				// 返回OK则成功
 				resultFlag = true;
 				logger.info("jedisPool存值成功:"+key+","+value);

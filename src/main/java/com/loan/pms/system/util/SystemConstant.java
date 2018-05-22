@@ -1,6 +1,6 @@
 package com.loan.pms.system.util;
 
-public interface SystemFinal {
+public interface SystemConstant {
 	// 登录用户名
 	public static final String LOGIN_USERNAME = "loginUserName";
 	// 登录密码

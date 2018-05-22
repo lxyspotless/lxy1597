@@ -79,4 +79,6 @@
     <import resource="quartz-config.xml"/>
     <!-- 引入redis -->
     <import resource="redis-config.xml"/>
+    <!-- 引入dubbo -->
+    <import resource="dubbo-provider-config.xml"/>
 </beans>

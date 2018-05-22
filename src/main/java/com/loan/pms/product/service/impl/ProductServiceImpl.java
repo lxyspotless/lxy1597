@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSONObject;
 import com.loan.pms.common.service.RedisService;
 import com.loan.pms.common.util.ListUtil;
-import com.loan.pms.common.util.RedisKeyFinal;
+import com.loan.pms.common.util.RedisKeyConstant;
 import com.loan.pms.product.dao.ProductDao;
 import com.loan.pms.product.dto.ProductInfoDTO;
 import com.loan.pms.product.dto.QuerySaleProductDTO;
@@ -92,7 +92,7 @@ public class ProductServiceImpl implements ProductService {
 	public void putPublishedProductListToRedis() {
 		Map<String, Object> redisMap = (Map<String, Object>)queryPublishedProductList();
 		JSONObject json = new JSONObject(redisMap);
-		redisService.setStringToRedis(RedisKeyFinal.REDIS_KEY_PUBLISHED_PRODUCT_LIST, json.toJSONString());
+		redisService.setStringToRedis(RedisKeyConstant.REDIS_KEY_PUBLISHED_PRODUCT_LIST, json.toJSONString());
 	}
 
 }

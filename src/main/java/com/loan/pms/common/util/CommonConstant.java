@@ -1,6 +1,6 @@
 package com.loan.pms.common.util;
 
-public interface CommonFinal {
+public interface CommonConstant {
 	// true
 	public static final String TRUE = "true";
 	// false

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.loan.pms.system.dto.SystemMenuDTO;
 import com.loan.pms.system.service.SystemService;
-import com.loan.pms.system.util.SystemFinal;
+import com.loan.pms.system.util.SystemConstant;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -27,8 +27,8 @@ public class SystemController {
 	@RequestMapping(value = "/login.do")
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
 		logger.info("Login system - begin");
-		String user = (String)request.getSession().getAttribute(SystemFinal.LOGIN_USERNAME);
-		String isSeesionTimeOut = (String)request.getSession().getAttribute(SystemFinal.IS_SESSION_TIME_OUT);
+		String user = (String)request.getSession().getAttribute(SystemConstant.LOGIN_USERNAME);
+		String isSeesionTimeOut = (String)request.getSession().getAttribute(SystemConstant.IS_SESSION_TIME_OUT);
 		ModelAndView mAndView = new ModelAndView();
 		// 登录已超时
 		if(!StringUtils.isEmpty(isSeesionTimeOut)){
@@ -46,30 +46,30 @@ public class SystemController {
 			mAndView.addObject("menuList",menuList);
 		}else{	// 正常登录
 			// 获取登录账号密码
-			String loginUserName = request.getParameter(SystemFinal.LOGIN_USERNAME);
-			String loginPassWord = request.getParameter(SystemFinal.LOGIN_PASSWORD);
+			String loginUserName = request.getParameter(SystemConstant.LOGIN_USERNAME);
+			String loginPassWord = request.getParameter(SystemConstant.LOGIN_PASSWORD);
 			String failedMsg = "";
 			String userName = "";
 			List<SystemMenuDTO> menuList = new ArrayList<SystemMenuDTO>();
 			// 判断账号密码是否有错
 			if(StringUtils.isEmpty(loginUserName)){
 				// 账户名不能为空
-				failedMsg = SystemFinal.LOGIN_ERROR_USER_NULL;
+				failedMsg = SystemConstant.LOGIN_ERROR_USER_NULL;
 			}else if(StringUtils.isEmpty(loginPassWord)){
 				// 登录密码不能为空
-				failedMsg = SystemFinal.LOGIN_ERROR_PASS_NULL;
+				failedMsg = SystemConstant.LOGIN_ERROR_PASS_NULL;
 			}else{
 				userName = systemService.loginSystem(loginUserName, loginPassWord);
 				if(StringUtils.isEmpty(userName)){
 					// 账号密码错误
-					failedMsg = SystemFinal.LOGIN_ERROR_LOGIN_FAILED;
+					failedMsg = SystemConstant.LOGIN_ERROR_LOGIN_FAILED;
 				}else{
 					// 登录成功，将用户名写入session
-					request.getSession().setAttribute(SystemFinal.LOGIN_USERNAME, loginUserName);
+					request.getSession().setAttribute(SystemConstant.LOGIN_USERNAME, loginUserName);
 					// 将当前时间写入session
-					request.getSession().setAttribute(SystemFinal.LAST_ACTIVE_TIME, System.currentTimeMillis());
+					request.getSession().setAttribute(SystemConstant.LAST_ACTIVE_TIME, System.currentTimeMillis());
 					// 去除登录已超时
-					request.getSession().removeAttribute(SystemFinal.IS_SESSION_TIME_OUT);
+					request.getSession().removeAttribute(SystemConstant.IS_SESSION_TIME_OUT);
 					// 设置登录用户
 					systemService.setLoginUser(userName);
 				}
@@ -96,8 +96,8 @@ public class SystemController {
 	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
 	public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		// 用户退出，将session内容清除
-		request.getSession().removeAttribute(SystemFinal.LOGIN_USERNAME);
-		request.getSession().removeAttribute(SystemFinal.LAST_ACTIVE_TIME);
+		request.getSession().removeAttribute(SystemConstant.LOGIN_USERNAME);
+		request.getSession().removeAttribute(SystemConstant.LAST_ACTIVE_TIME);
 		request.getSession().invalidate();
 		response.sendRedirect("login.jsp");
 		ModelAndView mAndView = new ModelAndView();

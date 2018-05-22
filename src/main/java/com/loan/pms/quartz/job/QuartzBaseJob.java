@@ -8,10 +8,10 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 
-import com.loan.pms.common.util.CommonFinal;
+import com.loan.pms.common.util.CommonConstant;
 import com.loan.pms.quartz.dto.QuartzJobLockDTO;
 import com.loan.pms.quartz.service.QuartzJobService;
-import com.loan.pms.quartz.util.QuartzFinal;
+import com.loan.pms.quartz.util.QuartzConstant;
 
 public abstract class QuartzBaseJob {
 	
@@ -28,12 +28,12 @@ public abstract class QuartzBaseJob {
 	
 	public void execute(){
 		// 开关已打开且系统已登录
-		if(CommonFinal.TRUE.equals(quartzSwitch) && lockMins > 0){
+		if(CommonConstant.TRUE.equals(quartzSwitch) && lockMins > 0){
 			logger.info("定时任务开始:"+this.getClass().getName());
 			Boolean isLocked = false;
 			QuartzJobLockDTO dto = new QuartzJobLockDTO();
 			dto.setTargetId(this.getClass().getName());
-			dto.setTargetType(QuartzFinal.QUARTZ_TARGET_TYPE);
+			dto.setTargetType(QuartzConstant.QUARTZ_TARGET_TYPE);
 			// job处于非锁定状态，加锁再执行
 			Date now = new Date();// new Date()为获取当前系统时间
 			Timestamp nowStamp = new Timestamp(now.getTime());
