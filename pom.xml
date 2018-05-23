@@ -286,7 +286,25 @@
   </dependencies>
   <build>
     <finalName>NEO-LOAN-PMS</finalName>
-    
+	<resources>
+       <resource>
+           <directory>src/main/java</directory>
+           <includes>
+               <include>**/*.xml</include>
+           </includes>
+           <!-- 打包时是否过滤该类型资源 -->
+           <filtering>false</filtering>
+       </resource>
+       <resource>
+           <directory>src/main/resources</directory>
+           <includes>
+               <include>**/*.properties</include>
+               <include>**/*.xml</include>
+           </includes>
+           <!-- 打包时是否过滤该类型资源 -->
+           <filtering>false</filtering>
+       </resource>
+	</resources>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
