@@ -21,6 +21,5 @@ public class BaseSpringJunit4RunnerTest {
 
 	@Test
 	public void testTemp(){
-		System.out.println("test");
 	}
 }
