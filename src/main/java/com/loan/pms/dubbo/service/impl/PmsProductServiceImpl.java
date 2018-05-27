@@ -35,6 +35,7 @@ public class PmsProductServiceImpl implements PmsProductService {
 			json = JSONObject.parseObject(publishedProductList);
 		} else {
 			// Redis为空取数据库
+			logger.info(String.format("Redis:%s,为空,取数据库", RedisKeyConstant.REDIS_KEY_PUBLISHED_PRODUCT_LIST));
 			Map<String, Object> publishedProductMap = (Map<String, Object>)productService.queryPublishedProductList();
 			json = new JSONObject(publishedProductMap);
 		}

@@ -24,31 +24,31 @@
         class="org.springframework.scheduling.quartz.SchedulerFactoryBean">  
         <property name="triggers">  
             <list>  
-                <ref bean="refreshDataDictionaryMemoryTrigger" />  
+                <ref bean="refreshDataDictionaryMemoryJobTrigger" />  
             </list>  
         </property>  
     </bean>
     
     <!-- 定时任务:刷新数据字典到内存 -->
-    <bean id="refreshDataDictionaryMemory" class="com.loan.pms.quartz.job.RefreshDataDictionaryMemoryJob">
+    <bean id="refreshDataDictionaryMemoryJob" class="com.loan.pms.quartz.job.RefreshDataDictionaryMemoryJob">
     	<property name="lockMins">
-    		<value>${pms.refreshDataDictionaryMemory.lockMins}</value>
+    		<value>${pms.refreshDataDictionaryMemoryJob.lockMins}</value>
     	</property>
     </bean>
-    <bean id="refreshDataDictionaryMemoryExecute" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <bean id="refreshDataDictionaryMemoryJobExecute" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
     	<property name="targetObject">
-    		<ref bean="refreshDataDictionaryMemory"/>
+    		<ref bean="refreshDataDictionaryMemoryJob"/>
     	</property>
     	<property name="targetMethod">
     		<value>execute</value>
     	</property>
     </bean>
-    <bean id="refreshDataDictionaryMemoryTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+    <bean id="refreshDataDictionaryMemoryJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
     	<property name="jobDetail">
-    		<ref bean="refreshDataDictionaryMemoryExecute"/>
+    		<ref bean="refreshDataDictionaryMemoryJobExecute"/>
     	</property>
     	<property name="cronExpression">
-    		<value>${pms.refreshDataDictionaryMemory.trigger}</value>
+    		<value>${pms.refreshDataDictionaryMemoryJob.trigger}</value>
     	</property>
     </bean>
 </beans>

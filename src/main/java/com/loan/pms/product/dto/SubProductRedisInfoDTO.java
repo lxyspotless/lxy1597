@@ -1,7 +1,13 @@
 package com.loan.pms.product.dto;
 
-public class SubProductRedisInfoDTO {
+import java.io.Serializable;
 
+public class SubProductRedisInfoDTO implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/*上级产品编号*/
 	private String parentProductNo;
 	/*上级产品名称*/
