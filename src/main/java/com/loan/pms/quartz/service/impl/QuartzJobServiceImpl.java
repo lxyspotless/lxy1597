@@ -16,12 +16,12 @@ public class QuartzJobServiceImpl implements QuartzJobService {
 	
 	@Override
 	public boolean lockJob(QuartzJobLockDTO dto) {
+		boolean resultFlag = false;
 		quartzJobDao.lockJob(dto);
 		if(CommonConstant.Y.equals(dto.getIsLocked())){
-			return true;
-		}else{
-			return false;
+			resultFlag = true;
 		}
+		return resultFlag;
 	}
 
 	@Override

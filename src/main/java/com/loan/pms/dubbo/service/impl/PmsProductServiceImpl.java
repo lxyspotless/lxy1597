@@ -6,15 +6,15 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Service;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSONObject;
 import com.loan.pms.common.service.RedisService;
 import com.loan.pms.common.util.RedisKeyConstant;
 import com.loan.pms.dubbo.service.PmsProductService;
 import com.loan.pms.product.service.ProductService;
 
-@Service(PmsProductService.SERVICE_ID)
+@Service
 public class PmsProductServiceImpl implements PmsProductService {
 
 	@Resource(name = RedisService.SERVICE_ID)

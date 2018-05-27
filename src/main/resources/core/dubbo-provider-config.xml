@@ -18,7 +18,10 @@
 	<!-- 用dubbo协议在20880端口暴露服务 -->
 	<dubbo:protocol name="dubbo" />
 
-	<!-- 声明需要暴露的服务接口 -->
-	<dubbo:service interface="com.loan.pms.dubbo.service.PmsProductService" ref="pms.dubbo.product.pmsProductService" />
+	<!-- 使用注解方式暴露接口 -->     
+    <dubbo:annotation package="com.loan.pms.dubbo" />
 	
+	<!-- 延迟到Spring初始化完成后，再暴露服务,服务调用超时设置为5秒,超时不重试-->
+    <dubbo:provider delay="-1" timeout="5000" retries="0"/>
+    
 </beans>
